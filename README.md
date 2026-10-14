@@ -8,6 +8,7 @@
 
 Supervised by Dr. Judy Feng and Dr. Jefferson Fong · Software Engineering & Advanced Workshop, BNBU
 
+<a href="https://github.com/Eric031212/E-DBA/actions/workflows/ci.yml"><img src="https://github.com/Eric031212/E-DBA/actions/workflows/ci.yml/badge.svg"></a>
 <img src="https://img.shields.io/badge/Python-3.12_|_3.13-3776AB?logo=python&logoColor=white">
 <img src="https://img.shields.io/badge/FastAPI-SQLAlchemy_2-009688?logo=fastapi&logoColor=white">
 <img src="https://img.shields.io/badge/DB-PostgreSQL_16_|_SQLite-4169E1?logo=postgresql&logoColor=white">
