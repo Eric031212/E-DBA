@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon %}
+{% block title %}Theses · {{ org.short_name }}{% endblock %}
+{% block content %}
+<div class="crumbs"><a href="/w/{{ org.slug }}">{{ org.short_name }}</a> / Thesis sharing</div>
+<div class="page-head"><div><h1>Thesis sharing</h1>
+  <p>{% if svc and svc.thesis_mode.value == 'download' %}Search is free. Downloading a PDF costs <b>{{ svc.price_cents|money }}</b> of quota{% if not home %}, paid by {{ user.organization.short_name }} to {{ org.short_name }}{% endif %}.{% else %}{{ org.short_name }} shares theses as <b>display only</b>: titles and abstracts, no PDFs.{% endif %}</p></div>
+  <span class="quota-pill">{{ user.quota_cents|money }} <small>quota</small></span></div>
+<form class="row" method="get" hx-get="/w/{{ org.slug }}/thesis" hx-target="#hits" hx-push-url="true" style="max-width:560px;margin-bottom:16px">
+  <div class="field" style="margin:0"><input type="search" name="q" value="{{ q }}" placeholder="Keywords, e.g. learning analytics" aria-label="Keywords"></div>
+  <button class="btn primary">{{ icon('search') }} Search</button>
+</form>
+<div id="hits">{% include "ws/_thesis_hits.html" %}</div>
+{% endblock %}

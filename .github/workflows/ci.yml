@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --all-extras
+      - run: uv run ruff check src tests
+      - run: uv run ruff format --check src tests
+      - run: uv run mypy src
+
+  test-sqlite:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: uv sync --all-extras
+      - run: uv run pytest --cov=edba --cov-report=term
+
+  test-postgres:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: edba
+          POSTGRES_PASSWORD: edba
+          POSTGRES_DB: edba_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      EDBA_TEST_DATABASE_URL: postgresql+psycopg://edba:edba@localhost:5432/edba_test
+      EDBA_DATABASE_URL: postgresql+psycopg://edba:edba@localhost:5432/edba_test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --all-extras
+      - name: Migrations apply cleanly and match the models
+        run: |
+          uv run alembic upgrade head
+          uv run alembic check
+          uv run alembic downgrade base
+      - run: uv run pytest
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t edba:ci .
+      - name: Smoke test the image against Postgres
+        run: |
+          docker network create edba
+          docker run -d --name db --network edba -e POSTGRES_USER=edba -e POSTGRES_PASSWORD=edba -e POSTGRES_DB=edba postgres:16-alpine
+          for i in $(seq 1 30); do docker exec db pg_isready -U edba && break; sleep 1; done
+          docker run -d --name web --network edba -p 8000:8000 \
+            -e EDBA_DATABASE_URL=postgresql+psycopg://edba:edba@db:5432/edba \
+            -e EDBA_SECRET_KEY=ci-secret-ci-secret-ci-secret-0123456789 edba:ci
+          for i in $(seq 1 30); do curl -fs localhost:8000/api/v1/healthz && break; sleep 1; done
+          docker exec web edba seed
+          curl -fs localhost:8000/ | grep -q "2</b><span>organizations"
+          docker exec web edba verify-audit

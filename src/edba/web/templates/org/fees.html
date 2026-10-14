@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf_field, icon, empty with context %}
+{% block title %}Membership fees{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Membership fees</h1><p>Members can only sign in once their level's fee is paid. Payments go from your bank account to E-DBA.</p></div></div>
+{% if not bank %}<div class="flash error">Add a <a href="/org/bank">bank account</a> before paying.</div>{% endif %}
+<div class="grid g3">
+  {% for line in quote %}
+  <form class="card" method="post" action="/org/fees/{{ line.level }}">
+    {{ csrf_field() }}<input type="hidden" name="idem" value="fee-{{ org.id }}-{{ line.level }}-{{ line.unpaid }}-{{ line.due_cents }}">
+    <div class="k muted" style="font-size:.85rem">Access level {{ line.level }} · {{ ACCESS_LEVELS[line.level] }}</div>
+    <div class="stat" style="padding:8px 0"><div class="v">{{ line.unit_cents|money }}<small class="muted"> {{ "/ person" if line.per_person else "one-off" }}</small></div></div>
+    {% if line.per_person %}<p class="muted" style="font-size:.9rem">{{ line.unpaid }} unpaid member{{ '' if line.unpaid == 1 else 's' }} · due <b>{{ line.due_cents|money }}</b></p>
+    {% else %}<p class="muted" style="font-size:.9rem">Covers every level-1 member and domain sign-in.</p>{% endif %}
+    {% if line.paid %}<button class="btn block" disabled>{{ icon('check') }} Paid</button>
+    {% else %}<button class="btn primary block">Pay {{ line.due_cents|money }}</button>{% endif %}
+  </form>
+  {% endfor %}
+</div>
+<div class="card table-wrap" style="margin-top:16px">
+  <h2>Transfers</h2>
+  <table>
+    <tr><th>When</th><th>Memo</th><th>Direction</th><th class="num">Amount</th><th>Status</th></tr>
+    {% for l in ledger %}
+    <tr><td>{{ l.created_at|dt(True) }}</td><td>{{ l.memo }}<span class="sub">{{ l.actor_email }}</span></td>
+      <td>{% if l.payer_org_id == org.id and l.payee_org_id == org.id %}internal{% elif l.payer_org_id == org.id %}<span class="badge">out</span>{% else %}<span class="badge ok">in</span>{% endif %}</td>
+      <td class="num">{{ l.amount_cents|money }}</td>
+      <td>{% if l.status.value == 'settled' %}<span class="badge ok">settled</span>{% else %}<span class="badge err" title="{{ l.gateway_reason }}">failed</span>{% endif %}</td></tr>
+    {% else %}{{ empty("No transfers yet.", 5) }}{% endfor %}
+  </table>
+</div>
+{% endblock %}

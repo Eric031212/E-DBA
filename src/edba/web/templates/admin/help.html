@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf_field with context %}
+{% block title %}Help desk{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Help desk</h1><p>Questions from conveners, admins and data users.</p></div></div>
+<div class="stack">
+{% for t in tickets %}
+  <div class="card">
+    <div class="card-head"><h2>#{{ t.id }} {{ t.title }}</h2>{% if t.answer %}<span class="badge ok">Answered</span>{% else %}<span class="badge warn">Open</span>{% endif %}</div>
+    <p class="faint" style="font-size:.85rem">{{ t.author_email }} · {{ t.author_role }} · {{ t.created_at|dt }}</p>
+    <p>{{ t.body }}</p>
+    {% if t.answer %}<div class="note"><b>{{ t.answered_by }}</b> · {{ t.answered_at|dt }}<br>{{ t.answer }}</div>
+    {% else %}
+    <form method="post" action="/admin/help/{{ t.id }}">{{ csrf_field() }}<div class="field"><textarea name="answer" placeholder="Write an answer…" required></textarea></div><button class="btn primary">Send answer</button></form>
+    {% endif %}
+  </div>
+{% else %}<div class="card empty">No help requests.</div>{% endfor %}
+</div>
+{% endblock %}

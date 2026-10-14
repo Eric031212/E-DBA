@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf_field, icon, level_badge, empty with context %}
+{% block title %}Members{% endblock %}
+{% block mainclass %}wide{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Members</h1><p>Data users of {{ org.short_name }}. Higher levels include everything lower levels can do.</p></div></div>
+{% if report and report.errors %}
+<div class="flash error"><div><b>Nothing was imported.</b> Fix these rows and upload again:<ul style="margin:6px 0 0">{% for row, msg in report.errors %}<li>{% if row %}Row {{ row }}: {% endif %}{{ msg }}</li>{% endfor %}</ul></div></div>
+{% endif %}
+<div class="grid g3">
+  <div class="card span2 table-wrap">
+    <table>
+      <tr><th>Member</th><th>Access</th><th>Fee</th><th class="num">Quota</th><th></th></tr>
+      {% for m in members %}
+      <tr>
+        <td><b>{{ m.name or '—' }}</b><span class="sub">{{ m.email }}</span></td>
+        <td>{{ level_badge(m.access_level) }}</td>
+        <td>{% set paid = org.level1_paid if m.access_level == 1 else m.fee_paid %}{% if paid %}<span class="badge ok">paid</span>{% else %}<span class="badge warn">unpaid</span>{% endif %}</td>
+        <td class="num">
+          <form method="post" action="/org/members/{{ m.id }}" class="row" style="justify-content:flex-end;flex-wrap:nowrap">{{ csrf_field() }}
+            <input type="number" name="quota" step="0.01" min="0" value="{{ m.quota_cents|plain }}" style="width:110px;padding:5px 8px">
+            <button class="btn sm" name="op" value="quota">Set</button></form>
+        </td>
+        <td class="num"><form method="post" action="/org/members/{{ m.id }}" onsubmit="return confirm('Remove {{ m.email }}?')">{{ csrf_field() }}<button class="btn sm danger" name="op" value="remove">Remove</button></form></td>
+      </tr>
+      {% else %}{{ empty("No members yet — upload a member list.", 5) }}{% endfor %}
+    </table>
+  </div>
+  <div class="stack">
+    <form class="card" method="post" action="/org/members/upload" enctype="multipart/form-data">
+      {{ csrf_field() }}
+      <h2>{{ icon('upload') }} Upload member list</h2>
+      <p class="muted" style="font-size:.88rem">Excel or CSV with columns <code>name, email, access_right, quota</code>. A row with an empty name and <code>*@your.domain</code> admits everyone with that email domain.</p>
+      <div class="field"><input type="file" name="file" accept=".xlsx,.csv" required></div>
+      <div class="btns"><button class="btn primary">Import</button><a class="btn" href="/org/members/template.csv">{{ icon('download') }} Template</a></div>
+    </form>
+    <div class="card">
+      <h2>Domain rules</h2>
+      {% for r in rules %}
+        <div class="row" style="justify-content:space-between;align-items:center;margin-bottom:8px">
+          <div><code>*{{ r.domain }}</code><br><small>L{{ r.access_level }} · quota {{ r.quota_cents|money }}</small></div>
+          <form method="post" action="/org/rules/{{ r.id }}/delete">{{ csrf_field() }}<button class="btn sm danger">Remove</button></form>
+        </div>
+      {% else %}<p class="muted" style="margin:0">None. Add a <code>*@domain</code> row to your member list.</p>{% endfor %}
+      {% if rules and not org.level1_paid %}<div class="note" style="margin-top:8px">Domain sign-in starts once the level-1 fee is paid.</div>{% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

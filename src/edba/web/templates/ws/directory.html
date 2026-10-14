@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon %}
+{% block title %}Workspaces{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Workspaces</h1><p>Every registered organization. Outside your own, you see their public data: courses and theses.</p></div></div>
+<div class="field" style="max-width:420px"><input type="search" name="q" value="{{ q }}" placeholder="Search organizations…" hx-get="/workspaces" hx-trigger="input changed delay:250ms, search" hx-target="#dir" aria-label="Search organizations"></div>
+<div id="dir">{% include "ws/_directory_grid.html" %}</div>
+{% endblock %}

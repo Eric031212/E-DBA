@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% from "_macros.html" import timeline, status_badge %}
+{% block title %}My application{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Application status</h1><p>Your organization's registration review.</p></div></div>
+{% if not app %}
+<div class="card"><p>No application found for {{ user.email }}. <a href="/apply">Start one</a>.</p></div>
+{% else %}
+<div class="grid g2">
+  <div class="card">
+    <div class="card-head"><h2>{{ app.org_full_name }}</h2>{{ status_badge(app.status) }}</div>
+    <dl class="kv">
+      <dt>Application</dt><dd>#{{ app.id }}</dd>
+      <dt>Short name</dt><dd>{{ app.org_short_name }}</dd>
+      <dt>O-Convener</dt><dd>{{ app.convener_name or '—' }} · {{ app.convener_email }}</dd>
+      <dt>Submitted</dt><dd>{{ app.submitted_at|dt }}</dd>
+    </dl>
+    {% if app.status.value == 'rejected' %}<hr><a class="btn" href="/apply">Submit a new application</a>{% endif %}
+  </div>
+  <div class="card"><h2>Progress</h2>{{ timeline(steps) }}</div>
+</div>
+{% endif %}
+{% endblock %}

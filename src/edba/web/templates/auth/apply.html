@@ -1,0 +1,22 @@
+{% extends "solo.html" if not user else "base.html" %}
+{% from "_macros.html" import csrf_field with context %}
+{% block title %}Register an organization{% endblock %}
+{% block content %}
+<div class="card" style="max-width:640px">
+  <h1>Register your organization</h1>
+  <p class="muted">An E-Admin and then a Senior E-Admin review each application. Once accepted, the contact below becomes the organization's O-Convener.</p>
+  <form method="post" action="/apply" enctype="multipart/form-data">
+    {{ csrf_field() }}
+    <div class="row">
+      <div class="field" style="flex:2"><label>Organization full name</label><input type="text" name="org_full_name" value="{{ form.org_full_name or '' }}" required placeholder="Harbor University"></div>
+      <div class="field"><label>Short name</label><input type="text" name="org_short_name" value="{{ form.org_short_name or '' }}" required placeholder="HBU" maxlength="20"><div class="hint">Becomes your workspace address.</div></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>O-Convener name</label><input type="text" name="convener_name" value="{{ form.convener_name or '' }}"></div>
+      <div class="field"><label>O-Convener email</label><input type="email" name="convener_email" value="{{ form.convener_email or '' }}" required></div>
+    </div>
+    <div class="field"><label>Proof of registration</label><input type="file" name="proof" accept=".pdf,.png,.jpg,.jpeg" required><div class="hint">PDF or image, up to 10 MB.</div></div>
+    <button class="btn primary">Continue</button>
+  </form>
+</div>
+{% endblock %}

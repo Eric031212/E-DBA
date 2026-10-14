@@ -1,0 +1,17 @@
+{% extends "solo.html" if not user else "base.html" %}
+{% from "_macros.html" import icon %}
+{% block title %}Policies{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Data-sharing policies</h1><p>The rules every member organization agrees to. Published and versioned by E-Admins.</p></div></div>
+<div class="stack">
+{% for p in policies %}
+  <div class="card">
+    <div class="card-head"><h2>{{ icon('scale') }} {{ p.title }}</h2><span class="badge">v{{ p.current.version }} · {{ p.updated_at|dt(True) }}</span></div>
+    <p class="muted">{{ p.summary }}</p>
+    <a class="btn sm" href="/policies/file/{{ p.current.id }}" target="_blank">{{ icon('doc') }} Read PDF</a>
+  </div>
+{% else %}
+  <div class="card empty">No policies published yet.</div>
+{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "solo.html" if not user else "base.html" %}
+{% block title %}Dev mailbox{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Dev mailbox</h1><p>Every email E-DBA sent (demo mode only; set <code>EDBA_MAIL_BACKEND=smtp</code> for real mail).</p></div>
+  <form method="get" class="row"><div class="field" style="margin:0"><input type="search" name="to" value="{{ to }}" placeholder="Filter by recipient"></div><button class="btn">Filter</button></form></div>
+<div class="stack">
+{% for m in messages %}
+  <div class="card"><div class="card-head"><h3 style="margin:0">{{ m.subject }}</h3><span class="faint" style="font-size:.85rem">to {{ m.to }} · {{ m.created_at|dt }}</span></div><div class="mail">{{ m.body }}</div></div>
+{% else %}<div class="card empty">No mail yet.</div>{% endfor %}
+</div>
+{% endblock %}

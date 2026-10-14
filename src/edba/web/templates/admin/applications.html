@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% from "_macros.html" import status_badge, empty %}
+{% block title %}Applications{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Organization applications</h1><p>{% if user.role == Role.SENIOR_E_ADMIN %}You can do first reviews and final reviews.{% elif user.role == Role.E_ADMIN %}You do the first review; a Senior E-Admin makes the final decision.{% else %}Read-only view.{% endif %}</p></div></div>
+{% if user.role.is_e_admin %}
+<div class="card table-wrap">
+  <div class="card-head"><h2>Waiting for you</h2><span class="badge warn">{{ queue|length }}</span></div>
+  <table>
+    <tr><th>#</th><th>Organization</th><th>O-Convener</th><th>Submitted</th><th>Stage</th><th></th></tr>
+    {% for a in queue %}
+    <tr><td class="mono faint">{{ a.id }}</td><td><b>{{ a.org_full_name }}</b><span class="sub">{{ a.org_short_name }}</span></td><td>{{ a.convener_email }}</td><td>{{ a.submitted_at|dt }}</td><td>{{ status_badge(a.status) }}</td><td class="num"><a class="btn sm primary" href="/admin/applications/{{ a.id }}">Review</a></td></tr>
+    {% else %}{{ empty("Queue is empty.", 6) }}{% endfor %}
+  </table>
+</div>
+{% endif %}
+<div class="card table-wrap">
+  <h2>All applications</h2>
+  <table>
+    <tr><th>#</th><th>Organization</th><th>O-Convener</th><th>Submitted</th><th>Status</th><th></th></tr>
+    {% for a in all %}
+    <tr><td class="mono faint">{{ a.id }}</td><td><b>{{ a.org_full_name }}</b><span class="sub">{{ a.org_short_name }}</span></td><td>{{ a.convener_email }}</td><td>{{ a.submitted_at|dt }}</td><td>{{ status_badge(a.status) }}</td><td class="num"><a class="btn sm" href="/admin/applications/{{ a.id }}">Details</a></td></tr>
+    {% else %}{{ empty("No applications.", 6) }}{% endfor %}
+  </table>
+</div>
+{% endblock %}

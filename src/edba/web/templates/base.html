@@ -1,0 +1,84 @@
+{% from "_macros.html" import icon, csrf_field with context %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Education Data Bay Area{% endblock %} · E-DBA</title>
+  <link rel="icon" href="/static/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/app.css">
+  <script src="/static/htmx.min.js" defer></script>
+</head>
+<body hx-headers='{"X-CSRF-Token": "{{ csrf }}"}'>
+{% include "_icons.html" %}
+<header class="topbar">
+  <a class="brand" href="/"><img class="logo" src="/static/logo.svg" alt="">E-DBA <span>Education Data Bay Area</span></a>
+  <div class="spacer"></div>
+  {% if user %}
+  <div class="who">
+    {% if user.role == Role.MEMBER %}<span class="quota-pill" id="quota-top" title="Your remaining quota">{{ user.quota_cents|money }} <small>quota</small></span>{% endif %}
+    <span class="email"><b>{{ user.display_name }}</b> · {{ user.role.label }}{% if user.organization %} · {{ user.organization.short_name }}{% endif %}</span>
+    <form method="post" action="/logout" class="inline">{{ csrf_field() }}<button class="btn sm" title="Sign out">{{ icon('logout') }}</button></form>
+  </div>
+  {% else %}
+  <div class="btns"><a class="btn" href="/policies">Policies</a><a class="btn" href="/apply">Register an organization</a><a class="btn primary" href="/login">Sign in</a></div>
+  {% endif %}
+</header>
+{% block shell %}
+<div class="shell">
+  <nav class="side">
+    {% macro nav(href, label, ic, exact=False) %}{% set p = request.url.path %}<a href="{{ href }}" class="{{ 'on' if (p == href if exact else p.startswith(href)) }}">{{ icon(ic) }}{{ label }}</a>{% endmacro %}
+    {% if user.role == Role.T_ADMIN %}
+      <div class="group">Technical admin</div>
+      {{ nav('/admin', 'Overview', 'home', True) }}
+      {{ nav('/admin/e-admins', 'E-Admin accounts', 'users') }}
+      {{ nav('/admin/logs', 'System logs', 'log') }}
+      {{ nav('/admin/help', 'Help desk', 'help') }}
+      {{ nav('/admin/applications', 'Applications', 'inbox') }}
+      {{ nav('/admin/policies', 'Policies', 'scale') }}
+    {% elif user.role.is_e_admin %}
+      <div class="group">{{ user.role.label }}</div>
+      {{ nav('/admin', 'Overview', 'home', True) }}
+      {{ nav('/admin/applications', 'Applications', 'inbox') }}
+      {{ nav('/admin/policies', 'Policies', 'scale') }}
+      {{ nav('/admin/fees', 'Membership fees', 'cash') }}
+      {{ nav('/help', 'Seek help', 'help') }}
+    {% elif user.role == Role.CONVENER %}
+      <div class="group">{{ user.organization.short_name }}</div>
+      {{ nav('/org', 'Overview', 'home', True) }}
+      {{ nav('/org/bank', 'Bank account', 'bank') }}
+      {{ nav('/org/members', 'Members', 'users') }}
+      {{ nav('/org/services', 'Services', 'grid') }}
+      {{ nav('/org/fees', 'Membership fees', 'cash') }}
+      {{ nav('/org/logs', 'Activity log', 'log') }}
+      <div class="group">More</div>
+      {{ nav('/policies', 'Policies', 'scale') }}
+      {{ nav('/help', 'Seek help', 'help') }}
+    {% elif user.role == Role.MEMBER %}
+      {% set home = user.organization %}
+      <div class="group">My workspace</div>
+      {{ nav('/w/' ~ home.slug, home.short_name ~ ' dashboard', 'home', True) }}
+      {{ nav('/workspaces', 'All workspaces', 'globe') }}
+      {% if org is defined and org and org.id != home.id %}
+        <div class="group">Visiting</div>
+        {{ nav('/w/' ~ org.slug, org.short_name, 'link', True) }}
+      {% endif %}
+      <div class="group">More</div>
+      {{ nav('/policies', 'Policies', 'scale') }}
+      {{ nav('/help', 'Seek help', 'help') }}
+    {% else %}
+      {{ nav('/application', 'My application', 'inbox') }}
+      {{ nav('/policies', 'Policies', 'scale') }}
+      {{ nav('/help', 'Seek help', 'help') }}
+    {% endif %}
+    {{ nav('/me', 'Profile', 'user') }}
+    {% if settings.mail_backend == 'inbox' and settings.env != 'prod' %}{{ nav('/dev/mailbox', 'Dev mailbox', 'inbox') }}{% endif %}
+  </nav>
+  <main class="main {% block mainclass %}{% endblock %}">
+    {% include "_flashes.html" %}
+    {% block content %}{% endblock %}
+  </main>
+</div>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}System logs{% endblock %}
+{% block mainclass %}wide{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>System logs</h1><p>Every event across E-DBA, newest first. Each row is hash-linked to the one before it.</p></div></div>
+<form class="card" hx-get="/admin/logs" hx-target="#log-rows" hx-trigger="input changed delay:300ms from:input[type=search], change" style="margin-bottom:16px">
+  <div class="row">
+    <div class="field"><label>Search</label><input type="search" name="q" value="{{ f.q }}" placeholder="email or text"></div>
+    <div class="field"><label>Activity</label><select name="action"><option value="">All</option>{% for a in actions %}<option {{ 'selected' if a == f.action }}>{{ a }}</option>{% endfor %}</select></div>
+    <div class="field"><label>Organization</label><select name="org"><option value="">All</option>{% for o in orgs %}<option value="{{ o.id }}" {{ 'selected' if o.id == f.org }}>{{ o.short_name }}</option>{% endfor %}</select></div>
+    <div class="field"><label>From</label><input type="date" name="date_from" value="{{ f.date_from }}"></div>
+    <div class="field"><label>To</label><input type="date" name="date_to" value="{{ f.date_to }}"></div>
+  </div>
+</form>
+<div class="card table-wrap"><table><thead><tr><th>#</th><th>When</th><th>Who</th><th>Org</th><th>Activity</th><th>Details</th></tr></thead><tbody id="log-rows">{% include "admin/_log_rows.html" %}</tbody></table></div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon %}
+{% block shell %}
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <span class="badge brand">Higher-education data space · v4</span>
+      <h1 style="margin-top:14px">Share academic data <em>without giving up control of it.</em></h1>
+      <p class="lead">E-DBA connects universities' own systems through policy-checked services: course catalogues, thesis repositories, student identity and GPA checks. Every call is priced, settled and written to a tamper-evident log.</p>
+      <div class="btns" style="margin-top:22px">
+        {% if user %}<a class="btn primary" href="/dashboard">Open my dashboard</a>
+        {% else %}<a class="btn primary" href="/login">Sign in with email</a><a class="btn" href="/apply">Register your organization</a>{% endif %}
+      </div>
+      <div class="kpis">
+        <div><b>{{ stats.orgs }}</b><span>organizations</span></div>
+        <div><b>{{ stats.members }}</b><span>data users</span></div>
+        <div><b>{{ stats.services }}</b><span>live services</span></div>
+      </div>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <img src="/static/hero.svg" alt="Organizations exchanging data through E-DBA" style="display:block;width:100%">
+    </div>
+  </section>
+  <section class="features">
+    <div class="card"><h2>{{ icon('shield') }} Data stays sovereign</h2><p>Each organization runs its own APIs. E-DBA only routes policy-checked requests; private services are never exposed outside the home workspace.</p></div>
+    <div class="card"><h2>{{ icon('users') }} Tiered roles</h2><p>Two-stage registration review, O-Conveners per organization, and three nested access levels for data users — public, private consumption, private provision.</p></div>
+    <div class="card"><h2>{{ icon('plug') }} No-code connectors</h2><p>Level-3 providers describe an endpoint with a URL and a JSON schema; the forms, batch uploads and result tables are generated from it.</p></div>
+    <div class="card"><h2>{{ icon('cash') }} Metered and settled</h2><p>Per-use prices, quotas and membership fees, settled through idempotent bank transfers recorded in a ledger.</p></div>
+    <div class="card"><h2>{{ icon('log') }} Tamper-evident audit</h2><p>Logins, reviews, payments and every service call land in a SHA-256 hash chain that admins can verify in one click.</p></div>
+    <div class="card"><h2>{{ icon('globe') }} Cross-campus discovery</h2><p>Browse every member's workspace; visitors see public data only — courses and theses — at the owner's terms.</p></div>
+  </section>
+  <footer class="footer">E-DBA · Education Data Bay Area · BNBU software engineering project, rebuilt as v4 · <a href="/api/docs">API</a> · <a href="/policies">Policies</a></footer>
+</div>
+{% endblock %}

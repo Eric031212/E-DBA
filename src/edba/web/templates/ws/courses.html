@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Courses · {{ org.short_name }}{% endblock %}
+{% block content %}
+<div class="crumbs"><a href="/w/{{ org.slug }}">{{ org.short_name }}</a> / Course information</div>
+<div class="page-head"><div><h1>Course information</h1><p>Courses published by {{ org.full_name }}.</p></div></div>
+<div class="field" style="max-width:420px"><input type="search" name="q" value="{{ q }}" placeholder="Search by code, title or keyword…" hx-get="/w/{{ org.slug }}/courses" hx-trigger="input changed delay:250ms, search" hx-target="#rows" aria-label="Search courses"></div>
+<div class="card table-wrap"><table><thead><tr><th>Code</th><th>Course</th><th class="num">Units</th></tr></thead><tbody id="rows">{% include "ws/_course_rows.html" %}</tbody></table></div>
+{% endblock %}

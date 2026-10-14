@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 700" width="1100" height="700" font-family="ui-sans-serif,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" role="img" aria-label="E-DBA v4 architecture">
+<defs><marker id="a-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#8a93a3"/></marker><marker id="a-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#0f6e74"/></marker><marker id="a-o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#c2410c"/></marker><marker id="a-bl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#1d4ed8"/></marker><marker id="a-gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#15803d"/></marker><marker id="a-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#b42318"/></marker></defs>
+<rect width="1100" height="700" fill="#ffffff"/>
+<text x="40" y="44" font-size="20" fill="#16191f" font-weight="700" text-anchor="start">E-DBA v4 · system architecture</text>
+<text x="40" y="66" font-size="12.5" fill="#5d6573" font-weight="400" text-anchor="start">One FastAPI process, layered: presentation → services → domain → persistence; outbound connectors to member systems.</text>
+<rect x="28" y="92" width="184" height="48" rx="10" fill="#f0f2f5" stroke="#d5dae1" stroke-width="1.4"/>
+<text x="120" y="113" font-size="13" fill="#16191f" font-weight="700" text-anchor="middle">Data users</text>
+<text x="120" y="130" font-size="11" fill="#5d6573" font-weight="400" text-anchor="middle">levels 1 · 2 · 3</text>
+<path d="M120 140 L120 176" fill="none" stroke="#8a93a3" stroke-width="1.6" marker-end="url(#a-g)"/>
+<rect x="238" y="92" width="184" height="48" rx="10" fill="#f0f2f5" stroke="#d5dae1" stroke-width="1.4"/>
+<text x="330" y="113" font-size="13" fill="#16191f" font-weight="700" text-anchor="middle">O-Conveners</text>
+<text x="330" y="130" font-size="11" fill="#5d6573" font-weight="400" text-anchor="middle">one per organization</text>
+<path d="M330 140 L330 176" fill="none" stroke="#8a93a3" stroke-width="1.6" marker-end="url(#a-g)"/>
+<rect x="448" y="92" width="184" height="48" rx="10" fill="#f0f2f5" stroke="#d5dae1" stroke-width="1.4"/>
+<text x="540" y="113" font-size="13" fill="#16191f" font-weight="700" text-anchor="middle">E-Admins</text>
+<text x="540" y="130" font-size="11" fill="#5d6573" font-weight="400" text-anchor="middle">review · policies · fees</text>
+<path d="M540 140 L540 176" fill="none" stroke="#8a93a3" stroke-width="1.6" marker-end="url(#a-g)"/>
+<rect x="658" y="92" width="184" height="48" rx="10" fill="#f0f2f5" stroke="#d5dae1" stroke-width="1.4"/>
+<text x="750" y="113" font-size="13" fill="#16191f" font-weight="700" text-anchor="middle">T-Admin</text>
+<text x="750" y="130" font-size="11" fill="#5d6573" font-weight="400" text-anchor="middle">accounts · logs · help</text>
+<path d="M750 140 L750 176" fill="none" stroke="#8a93a3" stroke-width="1.6" marker-end="url(#a-g)"/>
+<rect x="868" y="92" width="184" height="48" rx="10" fill="#f0f2f5" stroke="#d5dae1" stroke-width="1.4"/>
+<text x="960" y="113" font-size="13" fill="#16191f" font-weight="700" text-anchor="middle">Scripts / campus apps</text>
+<text x="960" y="130" font-size="11" fill="#5d6573" font-weight="400" text-anchor="middle">bearer-token JSON API</text>
+<path d="M960 140 L960 176" fill="none" stroke="#8a93a3" stroke-width="1.6" marker-end="url(#a-g)"/>
+<rect x="30" y="176" width="1040" height="92" rx="12" fill="#e3f3f3" stroke="#0f6e74" stroke-width="1.4"/>
+<text x="48" y="198" font-size="11" fill="#0f6e74" font-weight="700" text-anchor="start">PRESENTATION</text>
+<rect x="48" y="206" width="470" height="52" rx="10" fill="#fff" stroke="#0f6e74" stroke-width="1.4"/>
+<text x="283.0" y="230" font-size="14" fill="#16191f" font-weight="700" text-anchor="middle">Web UI · Jinja2 templates + htmx</text>
+<text x="283" y="250" font-size="11" fill="#5d6573" font-weight="400" text-anchor="middle">server-rendered pages, partial swaps, CSRF double-submit, signed session</text>
+<rect x="540" y="206" width="250" height="52" rx="10" fill="#fff" stroke="#0f6e74" stroke-width="1.4"/>
+<text x="665.0" y="230" font-size="14" fill="#16191f" font-weight="700" text-anchor="middle">REST API /api/v1</text>
+<text x="665" y="250" font-size="11" fill="#5d6573" font-weight="400" text-anchor="middle">JWT bearer · OpenAPI docs</text>
+<rect x="808" y="206" width="244" height="52" rx="10" fill="#fff" stroke="#0f6e74" stroke-width="1.4"/>
+<text x="930.0" y="230" font-size="14" fill="#16191f" font-weight="700" text-anchor="middle">CLI · edba</text>
+<text x="930" y="250" font-size="11" fill="#5d6573" font-weight="400" text-anchor="middle">init · seed · verify-audit · serve</text>
+<path d="M550 268 L550 296" fill="none" stroke="#0f6e74" stroke-width="1.6" marker-end="url(#a-b)"/>
+<rect x="30" y="296" width="1040" height="160" rx="12" fill="#fff" stroke="#c9cfd8" stroke-width="1.4"/>
+<text x="48" y="318" font-size="11" fill="#5d6573" font-weight="700" text-anchor="start">SERVICE LAYER (edba.services)</text>
+<rect x="48" y="328" width="192" height="54" rx="8" fill="#f0f2f5" stroke="#d5dae1" stroke-width="1.4"/>
+<text x="60" y="348" font-size="13" fill="#16191f" font-weight="700" text-anchor="start" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace">auth</text>
+<text x="60" y="364" font-size="10.5" fill="#5d6573" font-weight="400" text-anchor="start">emailed OTP, domain</text>
+<text x="60" y="377" font-size="10.5" fill="#5d6573" font-weight="400" text-anchor="start">sign-in, fee gating</text>
+<rect x="252" y="328" width="192" height="54" rx="8" fill="#f0f2f5" stroke="#d5dae1" stroke-width="1.4"/>
+<text x="264" y="348" font-size="13" fill="#16191f" font-weight="700" text-anchor="start" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace">registration</text>
+<text x="264" y="364" font-size="10.5" fill="#5d6573" font-weight="400" text-anchor="start">apply → review ×2</text>
+<text x="264" y="377" font-size="10.5" fill="#5d6573" font-weight="400" text-anchor="start">four-eyes, timeline</text>
+<rect x="456" y="328" width="192" height="54" rx="8" fill="#f0f2f5" stroke="#d5dae1" stroke-width="1.4"/>
+<text x="468" y="348" font-size="13" fill="#16191f" font-weight="700" text-anchor="start" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace">members</text>
+<text x="468" y="364" font-size="10.5" fill="#5d6573" font-weight="400" text-anchor="start">xlsx/csv import</text>
+<text x="468" y="377" font-size="10.5" fill="#5d6573" font-weight="400" text-anchor="start">wildcard domains</text>
+<rect x="660" y="328" width="192" height="54" rx="8" fill="#f0f2f5" stroke="#d5dae1" stroke-width="1.4"/>
+<text x="672" y="348" font-size="13" fill="#16191f" font-weight="700" text-anchor="start" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace">catalog</text>
+<text x="672" y="364" font-size="10.5" fill="#5d6573" font-weight="400" text-anchor="start">services, prices,</text>
+<text x="672" y="377" font-size="10.5" fill="#5d6573" font-weight="400" text-anchor="start">connector configs</text>
+<rect x="864" y="328" width="192" height="54" rx="8" fill="#fdf0e9" stroke="#c2410c" stroke-width="1.4"/>
+<text x="876" y="348" font-size="13" fill="#c2410c" font-weight="700" text-anchor="start" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace">usage</text>
+<text x="876" y="364" font-size="10.5" fill="#5d6573" font-weight="400" text-anchor="start">quota, batch,</text>
+<text x="876" y="377" font-size="10.5" fill="#5d6573" font-weight="400" text-anchor="start">thesis, settlement</text>
+<rect x="48" y="390" width="192" height="54" rx="8" fill="#fdf0e9" stroke="#c2410c" stroke-width="1.4"/>
+<text x="60" y="410" font-size="13" fill="#c2410c" font-weight="700" text-anchor="start" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace">billing</text>
+<text x="60" y="426" font-size="10.5" fill="#5d6573" font-weight="400" text-anchor="start">bank accounts, fees,</text>
+<text x="60" y="439" font-size="10.5" fill="#5d6573" font-weight="400" text-anchor="start">idempotent ledger</text>
+<rect x="252" y="390" width="192" height="54" rx="8" fill="#f0f2f5" stroke="#d5dae1" stroke-width="1.4"/>
+<text x="264" y="410" font-size="13" fill="#16191f" font-weight="700" text-anchor="start" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace">courses</text>
+<text x="264" y="426" font-size="10.5" fill="#5d6573" font-weight="400" text-anchor="start">catalogue CRUD</text>
+<text x="264" y="439" font-size="10.5" fill="#5d6573" font-weight="400" text-anchor="start">+ search</text>
+<rect x="456" y="390" width="192" height="54" rx="8" fill="#f0f2f5" stroke="#d5dae1" stroke-width="1.4"/>
+<text x="468" y="410" font-size="13" fill="#16191f" font-weight="700" text-anchor="start" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace">policies</text>
+<text x="468" y="426" font-size="10.5" fill="#5d6573" font-weight="400" text-anchor="start">versioned PDFs</text>
+<rect x="660" y="390" width="192" height="54" rx="8" fill="#f0f2f5" stroke="#d5dae1" stroke-width="1.4"/>
+<text x="672" y="410" font-size="13" fill="#16191f" font-weight="700" text-anchor="start" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace">helpdesk</text>
+<text x="672" y="426" font-size="10.5" fill="#5d6573" font-weight="400" text-anchor="start">seek-help tickets</text>
+<rect x="864" y="390" width="192" height="54" rx="8" fill="#fdf0e9" stroke="#c2410c" stroke-width="1.4"/>
+<text x="876" y="410" font-size="13" fill="#c2410c" font-weight="700" text-anchor="start" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace">audit</text>
+<text x="876" y="426" font-size="10.5" fill="#5d6573" font-weight="400" text-anchor="start">SHA-256 hash chain</text>
+<text x="876" y="439" font-size="10.5" fill="#5d6573" font-weight="400" text-anchor="start">search · verify</text>
+<path d="M550 456 L550 482" fill="none" stroke="#8a93a3" stroke-width="1.6" marker-end="url(#a-g)"/>
+<rect x="30" y="482" width="510" height="76" rx="12" fill="#fff" stroke="#c9cfd8" stroke-width="1.4"/>
+<text x="48" y="504" font-size="11" fill="#5d6573" font-weight="700" text-anchor="start">DOMAIN</text>
+<text x="48" y="526" font-size="12" fill="#16191f" font-weight="400" text-anchor="start">authz.py — effective level = own level at home,</text>
+<text x="48" y="543" font-size="12" fill="#16191f" font-weight="400" text-anchor="start">level 1 elsewhere; services carry a min level</text>
+<rect x="560" y="482" width="510" height="76" rx="12" fill="#fff" stroke="#c9cfd8" stroke-width="1.4"/>
+<text x="578" y="504" font-size="11" fill="#5d6573" font-weight="700" text-anchor="start">MODELS (SQLAlchemy 2.0, typed)</text>
+<text x="578" y="526" font-size="12" fill="#16191f" font-weight="400" text-anchor="start">17 tables · money in integer cents · UTC timestamps</text>
+<text x="578" y="543" font-size="12" fill="#16191f" font-weight="400" text-anchor="start">Alembic migrations · SQLite (dev) / PostgreSQL (prod)</text>
+<path d="M800 558 L800 590" fill="none" stroke="#8a93a3" stroke-width="1.6" marker-end="url(#a-g)"/>
+<rect x="640" y="590" width="320" height="74" rx="12" fill="#e8efff" stroke="#1d4ed8" stroke-width="1.4"/>
+<text x="800" y="618" font-size="14" fill="#1d4ed8" font-weight="700" text-anchor="middle">PostgreSQL 16 / SQLite</text>
+<text x="800" y="638" font-size="11.5" fill="#5d6573" font-weight="400" text-anchor="middle">audit_events chained by prev_hash</text>
+<text x="800" y="654" font-size="11.5" fill="#5d6573" font-weight="400" text-anchor="middle">bank secrets Fernet-encrypted at rest</text>
+<path d="M250 456 L250 470 L16 470 L16 627 L40 627" fill="none" stroke="#c2410c" stroke-width="1.6" stroke-dasharray="6 5" marker-end="url(#a-o)"/>
+<rect x="40" y="590" width="560" height="74" rx="12" fill="#fff" stroke="#c2410c" stroke-width="1.4" stroke-dasharray="5 4"/>
+<text x="320" y="614" font-size="13.5" fill="#c2410c" font-weight="700" text-anchor="middle">Member organizations&#x27; own systems (via connectors)</text>
+<text x="320" y="634" font-size="11.5" fill="#5d6573" font-weight="400" text-anchor="middle">student registry · GPA records · thesis repository — httpx, schema-driven,</text>
+<text x="320" y="650" font-size="11.5" fill="#5d6573" font-weight="400" text-anchor="middle">host allow-list, timeouts · bank gateway with Idempotency-Key</text>
+</svg>

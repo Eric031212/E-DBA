@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 430" width="1100" height="430" font-family="ui-sans-serif,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" role="img" aria-label="Organization registration state machine">
+<defs><marker id="a-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#8a93a3"/></marker><marker id="a-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#0f6e74"/></marker><marker id="a-o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#c2410c"/></marker><marker id="a-bl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#1d4ed8"/></marker><marker id="a-gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#15803d"/></marker><marker id="a-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#b42318"/></marker></defs>
+<rect width="1100" height="430" fill="#ffffff"/>
+<text x="40" y="44" font-size="20" fill="#16191f" font-weight="700" text-anchor="start">Organization registration · state machine</text>
+<text x="40" y="66" font-size="12.5" fill="#5d6573" font-weight="400" text-anchor="start">Each transition appends an ApplicationReview row; the applicant&#x27;s timeline is derived from those rows, not from the final status.</text>
+<circle cx="60" cy="200" r="10" fill="#16191f"/>
+<rect x="105.0" y="166" width="190" height="68" rx="34" fill="#f0f2f5" stroke="#8a93a3" stroke-width="1.8"/>
+<text x="200" y="196" font-size="15" fill="#8a93a3" font-weight="700" text-anchor="middle" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace">unverified</text>
+<text x="200" y="216" font-size="11.5" fill="#5d6573" font-weight="400" text-anchor="middle">form + proof uploaded</text>
+<rect x="355.0" y="166" width="190" height="68" rx="34" fill="#e8efff" stroke="#1d4ed8" stroke-width="1.8"/>
+<text x="450" y="196" font-size="15" fill="#1d4ed8" font-weight="700" text-anchor="middle" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace">pending</text>
+<text x="450" y="216" font-size="11.5" fill="#5d6573" font-weight="400" text-anchor="middle">waiting for an E-Admin</text>
+<rect x="615.0" y="166" width="210" height="68" rx="34" fill="#e8efff" stroke="#1d4ed8" stroke-width="1.8"/>
+<text x="720" y="196" font-size="15" fill="#1d4ed8" font-weight="700" text-anchor="middle" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace">first_approved</text>
+<text x="720" y="216" font-size="11.5" fill="#5d6573" font-weight="400" text-anchor="middle">waiting for a Senior</text>
+<rect x="895.0" y="166" width="170" height="68" rx="34" fill="#e7f6ec" stroke="#15803d" stroke-width="1.8"/>
+<text x="980" y="196" font-size="15" fill="#15803d" font-weight="700" text-anchor="middle" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace">accepted</text>
+<text x="980" y="216" font-size="11.5" fill="#5d6573" font-weight="400" text-anchor="middle">org + O-Convener</text>
+<rect x="475.0" y="326" width="220" height="68" rx="34" fill="#fdecea" stroke="#b42318" stroke-width="1.8"/>
+<text x="585" y="356" font-size="15" fill="#b42318" font-weight="700" text-anchor="middle" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace">rejected</text>
+<text x="585" y="376" font-size="11.5" fill="#5d6573" font-weight="400" text-anchor="middle">reason shown to applicant</text>
+<path d="M70 200 L104 200" fill="none" stroke="#16191f" stroke-width="1.6" marker-end="url(#a-g)"/>
+<path d="M296 200 L354 200" fill="none" stroke="#1d4ed8" stroke-width="1.6" marker-end="url(#a-bl)"/>
+<text x="325" y="186" font-size="11.5" fill="#1d4ed8" font-weight="600" text-anchor="middle">email OTP</text>
+<path d="M546 200 L614 200" fill="none" stroke="#1d4ed8" stroke-width="1.6" marker-end="url(#a-bl)"/>
+<text x="580" y="178" font-size="11.5" fill="#1d4ed8" font-weight="700" text-anchor="middle">E-Admin</text>
+<text x="580" y="192" font-size="11" fill="#5d6573" font-weight="400" text-anchor="middle">approves</text>
+<path d="M826 200 L894 200" fill="none" stroke="#15803d" stroke-width="1.6" marker-end="url(#a-gr)"/>
+<text x="860" y="150" font-size="11.5" fill="#15803d" font-weight="700" text-anchor="middle">Senior E-Admin</text>
+<text x="860" y="165" font-size="11" fill="#5d6573" font-weight="400" text-anchor="middle">approves</text>
+<text x="860" y="180" font-size="11" fill="#5d6573" font-weight="400" text-anchor="middle">(≠ first reviewer)</text>
+<path d="M450 234 L450 290 L505 330" fill="none" stroke="#b42318" stroke-width="1.6" marker-end="url(#a-r)"/>
+<text x="420" y="300" font-size="11.5" fill="#b42318" font-weight="700" text-anchor="end">E-Admin rejects</text>
+<path d="M720 234 L720 290 L665 330" fill="none" stroke="#b42318" stroke-width="1.6" marker-end="url(#a-r)"/>
+<text x="750" y="300" font-size="11.5" fill="#b42318" font-weight="700" text-anchor="start">Senior rejects</text>
+<text x="750" y="315" font-size="11" fill="#5d6573" font-weight="400" text-anchor="start" font-style="italic">(v3 showed this as an E-Admin rejection)</text>
+<rect x="40" y="300" width="300" height="92" rx="10" fill="#fff" stroke="#d5dae1" stroke-width="1.4" stroke-dasharray="5 4"/>
+<text x="56" y="322" font-size="12.5" fill="#16191f" font-weight="700" text-anchor="start">Guards</text>
+<text x="56" y="342" font-size="11.5" fill="#5d6573" font-weight="400" text-anchor="start">• short name unique across orgs</text>
+<text x="56" y="359" font-size="11.5" fill="#5d6573" font-weight="400" text-anchor="start">• rejection needs a written reason</text>
+<text x="56" y="376" font-size="11.5" fill="#5d6573" font-weight="400" text-anchor="start">• one review row per stage (unique)</text>
+</svg>

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon, level_badge %}
+{% block title %}{{ org.short_name }} workspace{% endblock %}
+{% block content %}
+<div class="crumbs"><a href="/workspaces">Workspaces</a> / {{ org.short_name }}</div>
+<div class="page-head">
+  <div><h1>{{ org.full_name }}</h1>
+    <p>{% if home %}Your home workspace · {{ level_badge(level) }}{% else %}Visiting as a guest · public data only (level 1){% endif %}</p></div>
+  <span class="quota-pill">{{ user.quota_cents|money }} <small>quota left</small></span>
+</div>
+{% if not home %}<div class="note" style="margin-bottom:16px">You're browsing another organization. Thesis downloads here are paid by {{ user.organization.short_name }} to {{ org.short_name }} at {{ org.short_name }}'s price.</div>{% endif %}
+<h2>Available services</h2>
+<div class="tiles">
+  {% for t in tiles %}
+  <a class="tile" href="{{ t.href }}"><span class="ic">{{ icon(t.icon) }}</span><b>{{ t.title }}</b><p>{{ t.summary }}</p>{% if t.tag %}<span class="tag">{{ t.tag }}</span>{% endif %}</a>
+  {% endfor %}
+</div>
+{% endblock %}

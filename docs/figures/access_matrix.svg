@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 652" width="1100" height="652" font-family="ui-sans-serif,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" role="img" aria-label="Access matrix">
+<defs><marker id="a-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#8a93a3"/></marker><marker id="a-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#0f6e74"/></marker><marker id="a-o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#c2410c"/></marker><marker id="a-bl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#1d4ed8"/></marker><marker id="a-gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#15803d"/></marker><marker id="a-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#b42318"/></marker></defs>
+<rect width="1100" height="652" fill="#ffffff"/>
+<text x="40" y="44" font-size="20" fill="#16191f" font-weight="700" text-anchor="start">Who can do what</text>
+<text x="40" y="66" font-size="12.5" fill="#5d6573" font-weight="400" text-anchor="start">Levels nest (3 ⊃ 2 ⊃ 1). In another organization&#x27;s workspace everyone is clamped to level 1: public data only.</text>
+<rect x="423" y="84" width="86" height="40" rx="8" fill="#e3f3f3" stroke="none" stroke-width="1.4"/>
+<text x="466.0" y="104" font-size="11.5" fill="#16191f" font-weight="700" text-anchor="middle">L1 home</text>
+<rect x="515" y="84" width="86" height="40" rx="8" fill="#e3f3f3" stroke="none" stroke-width="1.4"/>
+<text x="558.0" y="104" font-size="11.5" fill="#16191f" font-weight="700" text-anchor="middle">L2 home</text>
+<rect x="607" y="84" width="86" height="40" rx="8" fill="#e3f3f3" stroke="none" stroke-width="1.4"/>
+<text x="650.0" y="104" font-size="11.5" fill="#16191f" font-weight="700" text-anchor="middle">L3 home</text>
+<rect x="699" y="84" width="86" height="40" rx="8" fill="#e8efff" stroke="none" stroke-width="1.4"/>
+<text x="742.0" y="96" font-size="11.5" fill="#16191f" font-weight="700" text-anchor="middle">any level,</text>
+<text x="742.0" y="110" font-size="11.5" fill="#16191f" font-weight="700" text-anchor="middle">other org</text>
+<rect x="791" y="84" width="86" height="40" rx="8" fill="#f0f2f5" stroke="none" stroke-width="1.4"/>
+<text x="834.0" y="104" font-size="11.5" fill="#16191f" font-weight="700" text-anchor="middle">O-Convener</text>
+<rect x="883" y="84" width="86" height="40" rx="8" fill="#f0f2f5" stroke="none" stroke-width="1.4"/>
+<text x="926.0" y="104" font-size="11.5" fill="#16191f" font-weight="700" text-anchor="middle">E-Admin</text>
+<rect x="975" y="84" width="86" height="40" rx="8" fill="#f0f2f5" stroke="none" stroke-width="1.4"/>
+<text x="1018.0" y="104" font-size="11.5" fill="#16191f" font-weight="700" text-anchor="middle">T-Admin</text>
+<rect x="30" y="130" width="1040" height="36" rx="6" fill="#f8f9fb" stroke="none" stroke-width="1.4"/>
+<text x="44" y="153" font-size="12.5" fill="#16191f" font-weight="400" text-anchor="start">Course information · browse/search</text>
+<circle cx="466.0" cy="148.0" r="8" fill="#0f6e74"/>
+<circle cx="558.0" cy="148.0" r="8" fill="#0f6e74"/>
+<circle cx="650.0" cy="148.0" r="8" fill="#0f6e74"/>
+<circle cx="742.0" cy="148.0" r="8" fill="#1d4ed8"/>
+<line x1="829.0" y1="148.0" x2="839.0" y2="148.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="921.0" y1="148.0" x2="931.0" y2="148.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="1013.0" y1="148.0" x2="1023.0" y2="148.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<text x="44" y="189" font-size="12.5" fill="#16191f" font-weight="400" text-anchor="start">Thesis search · PDF if owner allows</text>
+<circle cx="466.0" cy="184.0" r="8" fill="#0f6e74"/>
+<circle cx="558.0" cy="184.0" r="8" fill="#0f6e74"/>
+<circle cx="650.0" cy="184.0" r="8" fill="#0f6e74"/>
+<circle cx="742.0" cy="184.0" r="8" fill="#1d4ed8"/>
+<line x1="829.0" y1="184.0" x2="839.0" y2="184.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="921.0" y1="184.0" x2="931.0" y2="184.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="1013.0" y1="184.0" x2="1023.0" y2="184.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<rect x="30" y="202" width="1040" height="36" rx="6" fill="#f8f9fb" stroke="none" stroke-width="1.4"/>
+<text x="44" y="225" font-size="12.5" fill="#16191f" font-weight="400" text-anchor="start">Student identity authentication</text>
+<line x1="461.0" y1="220.0" x2="471.0" y2="220.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<circle cx="558.0" cy="220.0" r="8" fill="#0f6e74"/>
+<circle cx="650.0" cy="220.0" r="8" fill="#0f6e74"/>
+<line x1="737.0" y1="220.0" x2="747.0" y2="220.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="829.0" y1="220.0" x2="839.0" y2="220.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="921.0" y1="220.0" x2="931.0" y2="220.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="1013.0" y1="220.0" x2="1023.0" y2="220.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<text x="44" y="261" font-size="12.5" fill="#16191f" font-weight="400" text-anchor="start">Student GPA records (single + batch)</text>
+<line x1="461.0" y1="256.0" x2="471.0" y2="256.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<circle cx="558.0" cy="256.0" r="8" fill="#0f6e74"/>
+<circle cx="650.0" cy="256.0" r="8" fill="#0f6e74"/>
+<line x1="737.0" y1="256.0" x2="747.0" y2="256.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="829.0" y1="256.0" x2="839.0" y2="256.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="921.0" y1="256.0" x2="931.0" y2="256.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="1013.0" y1="256.0" x2="1023.0" y2="256.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<rect x="30" y="274" width="1040" height="36" rx="6" fill="#f8f9fb" stroke="none" stroke-width="1.4"/>
+<text x="44" y="297" font-size="12.5" fill="#16191f" font-weight="400" text-anchor="start">Course configurations</text>
+<line x1="461.0" y1="292.0" x2="471.0" y2="292.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="553.0" y1="292.0" x2="563.0" y2="292.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<circle cx="650.0" cy="292.0" r="8" fill="#0f6e74"/>
+<line x1="737.0" y1="292.0" x2="747.0" y2="292.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="829.0" y1="292.0" x2="839.0" y2="292.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="921.0" y1="292.0" x2="931.0" y2="292.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="1013.0" y1="292.0" x2="1023.0" y2="292.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<text x="44" y="333" font-size="12.5" fill="#16191f" font-weight="400" text-anchor="start">API (connector) configurations</text>
+<line x1="461.0" y1="328.0" x2="471.0" y2="328.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="553.0" y1="328.0" x2="563.0" y2="328.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<circle cx="650.0" cy="328.0" r="8" fill="#0f6e74"/>
+<line x1="737.0" y1="328.0" x2="747.0" y2="328.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="829.0" y1="328.0" x2="839.0" y2="328.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="921.0" y1="328.0" x2="931.0" y2="328.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="1013.0" y1="328.0" x2="1023.0" y2="328.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<rect x="30" y="346" width="1040" height="36" rx="6" fill="#f8f9fb" stroke="none" stroke-width="1.4"/>
+<text x="44" y="369" font-size="12.5" fill="#16191f" font-weight="400" text-anchor="start">Bank account · members · services · prices</text>
+<line x1="461.0" y1="364.0" x2="471.0" y2="364.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="553.0" y1="364.0" x2="563.0" y2="364.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="645.0" y1="364.0" x2="655.0" y2="364.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="737.0" y1="364.0" x2="747.0" y2="364.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<circle cx="834.0" cy="364.0" r="8" fill="#0f6e74"/>
+<line x1="921.0" y1="364.0" x2="931.0" y2="364.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="1013.0" y1="364.0" x2="1023.0" y2="364.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<text x="44" y="405" font-size="12.5" fill="#16191f" font-weight="400" text-anchor="start">Pay membership fees · organization log</text>
+<line x1="461.0" y1="400.0" x2="471.0" y2="400.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="553.0" y1="400.0" x2="563.0" y2="400.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="645.0" y1="400.0" x2="655.0" y2="400.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="737.0" y1="400.0" x2="747.0" y2="400.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<circle cx="834.0" cy="400.0" r="8" fill="#0f6e74"/>
+<line x1="921.0" y1="400.0" x2="931.0" y2="400.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="1013.0" y1="400.0" x2="1023.0" y2="400.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<rect x="30" y="418" width="1040" height="36" rx="6" fill="#f8f9fb" stroke="none" stroke-width="1.4"/>
+<text x="44" y="441" font-size="12.5" fill="#16191f" font-weight="400" text-anchor="start">First-stage application review</text>
+<line x1="461.0" y1="436.0" x2="471.0" y2="436.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="553.0" y1="436.0" x2="563.0" y2="436.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="645.0" y1="436.0" x2="655.0" y2="436.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="737.0" y1="436.0" x2="747.0" y2="436.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="829.0" y1="436.0" x2="839.0" y2="436.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<circle cx="926.0" cy="436.0" r="8" fill="#0f6e74"/>
+<line x1="1013.0" y1="436.0" x2="1023.0" y2="436.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<text x="44" y="477" font-size="12.5" fill="#16191f" font-weight="400" text-anchor="start">Final review (Senior E-Admin, four-eyes)</text>
+<line x1="461.0" y1="472.0" x2="471.0" y2="472.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="553.0" y1="472.0" x2="563.0" y2="472.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="645.0" y1="472.0" x2="655.0" y2="472.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="737.0" y1="472.0" x2="747.0" y2="472.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="829.0" y1="472.0" x2="839.0" y2="472.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<circle cx="926.0" cy="472.0" r="8" fill="#fff" stroke="#0f6e74" stroke-width="2"/><path d="M926.0 464.0 a8 8 0 0 1 0 16 z" fill="#0f6e74"/>
+<line x1="1013.0" y1="472.0" x2="1023.0" y2="472.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<rect x="30" y="490" width="1040" height="36" rx="6" fill="#f8f9fb" stroke="none" stroke-width="1.4"/>
+<text x="44" y="513" font-size="12.5" fill="#16191f" font-weight="400" text-anchor="start">Policies (publish/version) · fee schedule</text>
+<line x1="461.0" y1="508.0" x2="471.0" y2="508.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="553.0" y1="508.0" x2="563.0" y2="508.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="645.0" y1="508.0" x2="655.0" y2="508.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="737.0" y1="508.0" x2="747.0" y2="508.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="829.0" y1="508.0" x2="839.0" y2="508.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<circle cx="926.0" cy="508.0" r="8" fill="#0f6e74"/>
+<text x="1018.0" y="512.0" font-size="11.5" fill="#5d6573" font-weight="600" text-anchor="middle">view</text>
+<text x="44" y="549" font-size="12.5" fill="#16191f" font-weight="400" text-anchor="start">E-Admin accounts · system logs · audit verify · help desk</text>
+<line x1="461.0" y1="544.0" x2="471.0" y2="544.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="553.0" y1="544.0" x2="563.0" y2="544.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="645.0" y1="544.0" x2="655.0" y2="544.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="737.0" y1="544.0" x2="747.0" y2="544.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="829.0" y1="544.0" x2="839.0" y2="544.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<line x1="921.0" y1="544.0" x2="931.0" y2="544.0" stroke="#c9cfd8" stroke-width="1.5"/>
+<circle cx="1018.0" cy="544.0" r="8" fill="#0f6e74"/>
+<circle cx="50" cy="592" r="7" fill="#0f6e74"/>
+<text x="64" y="596" font-size="12" fill="#5d6573" font-weight="400" text-anchor="start">allowed</text>
+<circle cx="150" cy="592" r="7" fill="#fff" stroke="#0f6e74" stroke-width="2"/><path d="M150 585 a7 7 0 0 1 0 14 z" fill="#0f6e74"/>
+<text x="164" y="596" font-size="12" fill="#5d6573" font-weight="400" text-anchor="start">Senior E-Admins only</text>
+<text x="340" y="596" font-size="12" fill="#5d6573" font-weight="400" text-anchor="start">Paid services also require quota; each service appears only after the O-Convener adds it and a level-3 provider configures its API.</text>
+</svg>

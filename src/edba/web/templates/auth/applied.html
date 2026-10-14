@@ -1,0 +1,10 @@
+{% extends "solo.html" %}
+{% block title %}Application submitted{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>Application submitted</h1>
+  <p>Thanks — <b>{{ app.org_full_name }}</b> ({{ app.org_short_name }}) is now in the review queue as application #{{ app.id }}.</p>
+  <p class="muted">Sign in with <b>{{ app.convener_email }}</b> at any time to follow its status. You'll also get an email after each review.</p>
+  <a class="btn primary" href="/login">Sign in to follow it</a>
+</div>
+{% endblock %}

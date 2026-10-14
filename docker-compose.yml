@@ -1,0 +1,30 @@
+# docker compose up --build   →  http://localhost:8000
+# Load demo data once:  docker compose exec web edba seed
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: edba
+      POSTGRES_PASSWORD: edba
+      POSTGRES_DB: edba
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U edba"]
+      interval: 3s
+      retries: 20
+
+  web:
+    build: .
+    depends_on:
+      db: { condition: service_healthy }
+    ports: ["8000:8000"]
+    environment:
+      EDBA_ENV: dev
+      EDBA_DATABASE_URL: postgresql+psycopg://edba:edba@db:5432/edba
+      EDBA_SECRET_KEY: ${EDBA_SECRET_KEY:-compose-demo-secret-change-me-0123456789}
+      EDBA_BANK_GATEWAY_URL: http://127.0.0.1:8000/gateway
+    volumes: [uploads:/app/var]
+
+volumes:
+  pgdata:
+  uploads:

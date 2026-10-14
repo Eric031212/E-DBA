@@ -1,0 +1,9 @@
+{% extends "solo.html" if not user else "base.html" %}
+{% block title %}{{ code }}{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>{{ {401: "Please sign in", 402: "Payment needed", 403: "Not allowed", 404: "Not found", 409: "Conflict", 422: "Check the form", 502: "Upstream system error"}.get(code, "Something went wrong") }}</h1>
+  <p class="muted">{{ message }}</p>
+  <div class="btns"><a class="btn" href="javascript:history.back()">Go back</a><a class="btn primary" href="/dashboard">Dashboard</a></div>
+</div>
+{% endblock %}

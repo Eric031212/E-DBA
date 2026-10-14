@@ -1,0 +1,16 @@
+{% from "_macros.html" import icon, csrf_field with context %}
+{% if error %}<div class="flash error">{{ error }}</div>{% endif %}
+{% if q and not hits and not error %}<div class="card empty">No thesis matches “{{ q }}”.</div>{% endif %}
+<div class="stack">
+{% for h in hits %}
+  <div class="card">
+    <div class="card-head"><h2 style="font-size:1.05rem">{{ h.title }}</h2>
+      {% if svc.thesis_mode.value == 'download' %}
+      <form method="post" action="/w/{{ org.slug }}/thesis/download">{{ csrf_field() }}<input type="hidden" name="title" value="{{ h.title }}"><input type="hidden" name="q" value="{{ q }}"><button class="btn sm primary">{{ icon('download') }} PDF · {{ svc.price_cents|money }}</button></form>
+      {% endif %}
+    </div>
+    {% if h.extra %}<p class="faint" style="font-size:.85rem">{{ h.extra.values()|join(' · ') }}</p>{% endif %}
+    <p class="muted" style="margin:0">{{ h.abstract }}</p>
+  </div>
+{% endfor %}
+</div>

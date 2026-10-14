@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon %}
+{% block title %}{{ org.short_name }}{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>{{ org.full_name }}</h1><p>{{ org.short_name }} · O-Convener console · workspace <a href="/workspaces">/w/{{ org.slug }}</a></p></div></div>
+{% set due = quote|sum(attribute='due_cents') %}
+<div class="grid g4">
+  <a class="card stat" href="/org/bank" style="color:inherit"><div class="k">Settlement account</div><div class="v" style="font-size:1.05rem;margin-top:8px">{% if bank %}<span class="badge ok">Verified</span> {{ bank.masked_no }}{% else %}<span class="badge warn">Not set up</span>{% endif %}</div></a>
+  <a class="card stat" href="/org/members" style="color:inherit"><div class="k">Members</div><div class="v">{{ members|length }} <small class="muted">+ {{ rules|length }} domain rule{{ '' if rules|length == 1 else 's' }}</small></div></a>
+  <a class="card stat" href="/org/services" style="color:inherit"><div class="k">Services</div><div class="v">{{ services|selectattr(1)|list|length }} <small class="muted">active of {{ services|length }}</small></div></a>
+  <a class="card stat" href="/org/fees" style="color:inherit"><div class="k">Membership fees due</div><div class="v">{{ due|money }}</div></a>
+</div>
+<div class="grid g2" style="margin-top:16px">
+  <div class="card">
+    <h2>Getting set up</h2>
+    {% set steps = [
+      (bank, 'Verify your bank account', 'Needed before adding paid services and paying fees.', '/org/bank'),
+      (members|length > 0 or rules|length > 0, 'Upload your member list', 'Names, emails, access levels and quotas — or a whole email domain.', '/org/members'),
+      (quote[0].paid, 'Pay the level-1 membership fee', 'Lets your level-1 users and domain sign-ins in.', '/org/fees'),
+      (services|length > 0, 'Choose services', 'Courses, theses, identity and GPA checks.', '/org/services'),
+      (services|selectattr(1)|list|length == services|length and services|length > 0, 'Have a level-3 provider connect APIs', 'Services go live once their API is configured.', '/org/services'),
+    ] %}
+    <ol class="timeline">
+      {% for ok, title, hint, href in steps %}
+      <li class="{{ 'done' if ok else 'waiting' }}"><span class="dot">{% if ok %}{{ icon('check') }}{% endif %}</span><b><a href="{{ href }}">{{ title }}</a></b><span class="meta">{{ hint }}</span></li>
+      {% endfor %}
+    </ol>
+  </div>
+  <div class="card">
+    <div class="card-head"><h2>Recent activity</h2><a href="/org/logs">All →</a></div>
+    <table>{% for e in recent %}<tr><td class="faint" style="width:110px">{{ e.at|dt(True) }}</td><td>{{ e.summary }}<span class="sub">{{ e.actor_email }}</span></td></tr>{% else %}<tr><td class="empty">Nothing yet.</td></tr>{% endfor %}</table>
+  </div>
+</div>
+{% endblock %}

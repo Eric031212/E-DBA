@@ -1,0 +1,13 @@
+{% if error %}<div class="flash error">{{ error }}</div>
+{% elif result %}
+<div class="card table-wrap">
+  <div class="card-head"><h2>Result</h2><span class="badge {{ 'ok' if result.rows }}">{{ result.rows|length }} record{{ '' if result.rows|length == 1 else 's' }} · charged {{ result.charged_cents|money }}</span></div>
+  <table>
+    <tr>{% for f in result.fields %}<th>{{ f|replace('_', ' ') }}</th>{% endfor %}</tr>
+    {% for r in result.rows %}<tr>{% for f in result.fields %}{% set v = r.get(f, r.get(f ~ '?', '')) %}<td>{% if v in ('verified', 'success') %}<span class="badge ok">{{ v }}</span>{% elif v in ('not verified', 'failure') %}<span class="badge err">{{ v }}</span>{% else %}{{ v }}{% endif %}</td>{% endfor %}</tr>{% endfor %}
+  </table>
+  {% if result.failures %}<details style="margin-top:10px"><summary>{{ result.failures|length }} row(s) failed and were not charged</summary><ul>{% for row, msg in result.failures %}<li>Row {{ row }}: {{ msg }}</li>{% endfor %}</ul></details>{% endif %}
+</div>
+{% endif %}
+<span class="quota-pill" id="quota" hx-swap-oob="true">{{ user.quota_cents|money }} <small>quota</small></span>
+<span class="quota-pill" id="quota-top" title="Your remaining quota" hx-swap-oob="true">{{ user.quota_cents|money }} <small>quota</small></span>

@@ -1,0 +1,2 @@
+{% for c in courses %}<tr><td class="mono"><b>{{ c.code }}</b></td><td><b>{{ c.title }}</b><span class="sub">{{ c.description }}</span></td><td class="num">{{ c.units }}</td></tr>
+{% else %}<tr><td class="empty" colspan="3">No courses found.</td></tr>{% endfor %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Activity log{% endblock %}
+{% block mainclass %}wide{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Activity log</h1><p>Everything that happened in {{ org.short_name }}: sign-ins, service calls, payments, configuration.</p></div></div>
+<form class="card" hx-get="/org/logs" hx-target="#log-rows" hx-trigger="input changed delay:300ms from:input[type=search], change" style="margin-bottom:16px">
+  <div class="row">
+    <div class="field"><label>Search</label><input type="search" name="q" value="{{ f.q }}" placeholder="email or text"></div>
+    <div class="field"><label>Activity</label><select name="action"><option value="">All</option>{% for a in actions %}<option {{ 'selected' if a == f.action }}>{{ a }}</option>{% endfor %}</select></div>
+  </div>
+</form>
+<div class="card table-wrap"><table><thead><tr><th>#</th><th>When</th><th>Who</th><th>Org</th><th>Activity</th><th>Details</th></tr></thead><tbody id="log-rows">{% include "admin/_log_rows.html" %}</tbody></table></div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf_field, icon with context %}
+{% block title %}Policies{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Data-sharing policies</h1><p>{% if can_edit %}Upload a new PDF to publish a new version; earlier versions stay available.{% else %}Read-only: policies are maintained by E-Admins.{% endif %}</p></div></div>
+<div class="grid {{ 'g3' if can_edit else '' }}">
+  <div class="stack {{ 'span2' if can_edit else '' }}">
+  {% for p in policies %}
+    <div class="card">
+      <div class="card-head"><h2>{{ icon('scale') }} {{ p.title }}</h2><span class="badge">v{{ p.current.version }}</span></div>
+      <p class="muted">{{ p.summary }}</p>
+      <table>
+        {% for v in p.versions|reverse %}<tr><td>v{{ v.version }}</td><td>{{ v.uploaded_at|dt }}</td><td>{{ v.uploaded_by }}</td><td class="num"><a href="/admin/policies/file/{{ v.id }}" target="_blank">PDF</a></td></tr>{% endfor %}
+      </table>
+      {% if can_edit %}
+      <details style="margin-top:10px"><summary>Edit or publish a new version</summary>
+        <form method="post" action="/admin/policies/{{ p.id }}" enctype="multipart/form-data" style="margin-top:10px">{{ csrf_field() }}
+          <div class="field"><label>Title</label><input type="text" name="title" value="{{ p.title }}"></div>
+          <div class="field"><label>Summary</label><textarea name="summary">{{ p.summary }}</textarea></div>
+          <div class="field"><label>New PDF (optional)</label><input type="file" name="file" accept=".pdf"></div>
+          <div class="btns"><button class="btn primary" name="op" value="revise">Save</button><button class="btn danger" name="op" value="archive">Archive policy</button></div>
+        </form>
+      </details>
+      {% endif %}
+    </div>
+  {% else %}<div class="card empty">No policies yet.</div>{% endfor %}
+  </div>
+  {% if can_edit %}
+  <form class="card" method="post" action="/admin/policies" enctype="multipart/form-data" style="align-self:start">
+    {{ csrf_field() }}
+    <h2>New policy</h2>
+    <div class="field"><label>Title</label><input type="text" name="title" required></div>
+    <div class="field"><label>Summary</label><textarea name="summary"></textarea></div>
+    <div class="field"><label>PDF</label><input type="file" name="file" accept=".pdf" required></div>
+    <button class="btn primary">Publish</button>
+  </form>
+  {% endif %}
+</div>
+{% endblock %}

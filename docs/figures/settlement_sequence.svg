@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 620" width="1100" height="620" font-family="ui-sans-serif,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" role="img" aria-label="Cross-organization thesis download sequence">
+<defs><marker id="a-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#8a93a3"/></marker><marker id="a-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#0f6e74"/></marker><marker id="a-o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#c2410c"/></marker><marker id="a-bl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#1d4ed8"/></marker><marker id="a-gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#15803d"/></marker><marker id="a-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#b42318"/></marker></defs>
+<rect width="1100" height="620" fill="#ffffff"/>
+<text x="40" y="44" font-size="20" fill="#16191f" font-weight="700" text-anchor="start">Cross-organization thesis download · sequence</text>
+<text x="40" y="66" font-size="12.5" fill="#5d6573" font-weight="400" text-anchor="start">A Harbor (HBU) user downloads a Summit (SIT) thesis. Nothing is charged unless the PDF arrives and the transfer settles.</text>
+<rect x="20" y="88" width="180" height="38" rx="8" fill="#fff" stroke="#1d4ed8" stroke-width="1.6"/>
+<text x="110" y="112" font-size="13" fill="#1d4ed8" font-weight="700" text-anchor="middle">HBU data user</text>
+<line x1="110" y1="126" x2="110" y2="596" stroke="#d5dae1" stroke-width="1.4" stroke-dasharray="4 4"/>
+<rect x="240" y="88" width="180" height="38" rx="8" fill="#fff" stroke="#0f6e74" stroke-width="1.6"/>
+<text x="330" y="112" font-size="13" fill="#0f6e74" font-weight="700" text-anchor="middle">E-DBA usage service</text>
+<line x1="330" y1="126" x2="330" y2="596" stroke="#d5dae1" stroke-width="1.4" stroke-dasharray="4 4"/>
+<rect x="470" y="88" width="180" height="38" rx="8" fill="#fff" stroke="#c2410c" stroke-width="1.6"/>
+<text x="560" y="112" font-size="13" fill="#c2410c" font-weight="700" text-anchor="middle">SIT thesis API</text>
+<line x1="560" y1="126" x2="560" y2="596" stroke="#d5dae1" stroke-width="1.4" stroke-dasharray="4 4"/>
+<rect x="690" y="88" width="180" height="38" rx="8" fill="#fff" stroke="#15803d" stroke-width="1.6"/>
+<text x="780" y="112" font-size="13" fill="#15803d" font-weight="700" text-anchor="middle">Bank gateway</text>
+<line x1="780" y1="126" x2="780" y2="596" stroke="#d5dae1" stroke-width="1.4" stroke-dasharray="4 4"/>
+<rect x="900" y="88" width="180" height="38" rx="8" fill="#fff" stroke="#b42318" stroke-width="1.6"/>
+<text x="990" y="112" font-size="13" fill="#b42318" font-weight="700" text-anchor="middle">Ledger + audit</text>
+<line x1="990" y1="126" x2="990" y2="596" stroke="#d5dae1" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M110 160 L324 160" fill="none" stroke="#1d4ed8" stroke-width="1.6" marker-end="url(#a-bl)"/>
+<text x="220.0" y="153" font-size="11.5" fill="#1d4ed8" font-weight="600" text-anchor="middle">POST /w/sit/thesis/download</text>
+<rect x="340" y="178" width="210" height="92" rx="6" fill="#e3f3f3" stroke="#0f6e74" stroke-width="1.4"/>
+<text x="352" y="198" font-size="11.5" fill="#0f6e74" font-weight="500" text-anchor="start">authz: level 1 in SIT ✓</text>
+<text x="352" y="217" font-size="11.5" fill="#0f6e74" font-weight="500" text-anchor="start">SIT mode = download ✓</text>
+<text x="352" y="236" font-size="11.5" fill="#0f6e74" font-weight="500" text-anchor="start">quota ≥ ¥8.00 (SIT price) ✓</text>
+<text x="352" y="255" font-size="11.5" fill="#0f6e74" font-weight="500" text-anchor="start">HBU has a bank account ✓</text>
+<path d="M330 296 L554 296" fill="none" stroke="#c2410c" stroke-width="1.6" marker-end="url(#a-o)"/>
+<text x="445.0" y="289" font-size="11.5" fill="#c2410c" font-weight="600" text-anchor="middle">GET /campus/summit/thesis/pdf?title=…</text>
+<path d="M560 326 L336 326" fill="none" stroke="#c2410c" stroke-width="1.6" stroke-dasharray="6 5" marker-end="url(#a-o)"/>
+<text x="445.0" y="319" font-size="11.5" fill="#c2410c" font-weight="600" text-anchor="middle">200 application/pdf</text>
+<path d="M330 364 L774 364" fill="none" stroke="#15803d" stroke-width="1.6" marker-end="url(#a-gr)"/>
+<text x="555.0" y="357" font-size="11.5" fill="#15803d" font-weight="600" text-anchor="middle">POST /bank/transfer  HBU → SIT  ¥8.00</text>
+<text x="555.0" y="379" font-size="10.5" fill="#5d6573" font-weight="400" text-anchor="middle">Idempotency-Key: replays return the first result</text>
+<path d="M780 408 L336 408" fill="none" stroke="#15803d" stroke-width="1.6" stroke-dasharray="6 5" marker-end="url(#a-gr)"/>
+<text x="555.0" y="401" font-size="11.5" fill="#15803d" font-weight="600" text-anchor="middle">{&quot;status&quot;: &quot;success&quot;}</text>
+<path d="M330 446 L984 446" fill="none" stroke="#b42318" stroke-width="1.6" marker-end="url(#a-r)"/>
+<text x="660.0" y="439" font-size="11.5" fill="#b42318" font-weight="600" text-anchor="middle">ledger row (settled) + audit events</text>
+<text x="660.0" y="461" font-size="10.5" fill="#5d6573" font-weight="400" text-anchor="middle">payment.settled · thesis.downloaded — hash-chained</text>
+<rect x="340" y="476" width="210" height="34" rx="6" fill="#e3f3f3" stroke="#0f6e74" stroke-width="1.4"/>
+<text x="445" y="498" font-size="12" fill="#0f6e74" font-weight="700" text-anchor="middle">quota −¥8.00 · commit</text>
+<path d="M330 540 L116 540" fill="none" stroke="#1d4ed8" stroke-width="1.6" stroke-dasharray="6 5" marker-end="url(#a-bl)"/>
+<text x="220.0" y="533" font-size="11.5" fill="#1d4ed8" font-weight="600" text-anchor="middle">PDF attachment</text>
+<rect x="560" y="470" width="520" height="120" rx="10" fill="#fff" stroke="#d5dae1" stroke-width="1.4" stroke-dasharray="5 4"/>
+<text x="576" y="492" font-size="12.5" fill="#16191f" font-weight="700" text-anchor="start">If anything fails</text>
+<text x="576" y="514" font-size="11.5" fill="#5d6573" font-weight="400" text-anchor="start">• API error / not a PDF → no transfer, no quota taken</text>
+<text x="576" y="532" font-size="11.5" fill="#5d6573" font-weight="400" text-anchor="start">• bank refuses → ledger row status=failed is kept, PDF withheld, quota untouched</text>
+<text x="576" y="550" font-size="11.5" fill="#5d6573" font-weight="400" text-anchor="start">• same user&#x27;s own organization → transfer HBU → HBU (quota only)</text>
+<text x="576" y="568" font-size="11.5" fill="#5d6573" font-weight="400" text-anchor="start">• display-only theses → 403 before anything is called</text>
+</svg>

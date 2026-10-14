@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon, csrf_field with context %}
+{% block title %}Overview{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Welcome, {{ user.display_name }}</h1><p>{{ user.role.label }} console.</p></div></div>
+<div class="grid g4">
+  <div class="card stat"><div class="k">Organizations</div><div class="v">{{ stats.orgs }}</div></div>
+  <div class="card stat"><div class="k">Data users</div><div class="v">{{ stats.members }}</div></div>
+  {% if user.role.is_e_admin %}
+  <a class="card stat" href="/admin/applications" style="color:inherit"><div class="k">Waiting for you</div><div class="v">{{ stats.queue }} <small class="muted">applications</small></div></a>
+  {% else %}
+  <div class="card stat"><div class="k">Applications in review</div><div class="v">{{ stats.pending_all }}</div></div>
+  {% endif %}
+  <a class="card stat" href="{{ '/admin/help' if user.role == Role.T_ADMIN else '/help' }}" style="color:inherit"><div class="k">Open help requests</div><div class="v">{{ stats.open_help }}</div></a>
+</div>
+<div class="grid g3" style="margin-top:16px">
+  <div class="card span2">
+    <div class="card-head"><h2>{{ icon('log') }} Recent activity</h2>{% if user.role == Role.T_ADMIN %}<a href="/admin/logs">All logs →</a>{% endif %}</div>
+    <table>{% for e in recent %}<tr><td style="width:120px" class="faint">{{ e.at|dt(True) }}</td><td><code>{{ e.action }}</code><span class="sub">{{ e.summary }}</span></td></tr>{% endfor %}</table>
+  </div>
+  <div class="card">
+    {% if chain %}
+      <h2>{{ icon('shield') }} Audit chain</h2>
+      {% if chain.ok %}<p><span class="badge ok">Intact</span> {{ chain.checked }} events hash-linked.</p>
+      {% else %}<p><span class="badge err">Broken</span> at event #{{ chain.broken_at }}: {{ chain.reason }}</p>{% endif %}
+      <form method="post" action="/admin/audit/verify">{{ csrf_field() }}<button class="btn">{{ icon('shield') }} Re-verify now</button></form>
+    {% else %}
+      <h2>{{ icon('inbox') }} Review rules</h2>
+      <p class="muted" style="font-size:.9rem">Applications pass an E-Admin first, then a Senior E-Admin. The final reviewer must be a different person (four-eyes rule). Rejections need a reason, which the applicant sees.</p>
+      <a class="btn primary" href="/admin/applications">Open the queue</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

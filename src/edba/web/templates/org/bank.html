@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf_field, icon with context %}
+{% block title %}Bank account{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Settlement bank account</h1><p>Membership fees and service usage are paid from this account; thesis downloads by other organizations are paid into it.</p></div></div>
+<div class="grid g2">
+  <form class="card" method="post" action="/org/bank" autocomplete="off">
+    {{ csrf_field() }}
+    <h2>{{ "Replace account" if bank else "Add account" }}</h2>
+    <div class="field"><label>Bank name</label><input type="text" name="bank_name" required></div>
+    <div class="field"><label>Account name</label><input type="text" name="account_name" required></div>
+    <div class="field"><label>Account number</label><input type="text" name="account_no" required inputmode="numeric"></div>
+    <div class="field"><label>Account password</label><input type="password" name="password" required autocomplete="new-password"><div class="hint">Checked live with the bank, then stored encrypted (Fernet / AES-128).</div></div>
+    <button class="btn primary">{{ icon('shield') }} Verify with bank</button>
+  </form>
+  <div class="card">
+    <h2>Current account</h2>
+    {% if bank %}
+      <dl class="kv"><dt>Bank</dt><dd>{{ bank.bank_name }}</dd><dt>Account name</dt><dd>{{ bank.account_name }}</dd><dt>Number</dt><dd class="mono">{{ bank.masked_no }}</dd><dt>Verified</dt><dd>{{ bank.verified_at|dt }}</dd></dl>
+    {% else %}<p class="muted">None yet. Paid services and membership payments are blocked until you add one.</p>{% endif %}
+    {% if settings.mount_demo_gateway %}<div class="note" style="margin-top:14px">Demo bank accounts: <code>FutureLearn Federal Bank / Utopia Credit Union / 670547811218584 / 9978</code>, <code>Global Education Bank / Campus Cash Cooperative / 641387141765274 / 8799</code>, <code>Pearl River Savings / Lakeside Scholars Fund / 622848000123456 / 4321</code>.</div>{% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 440" font-family="ui-sans-serif,-apple-system,Segoe UI,Helvetica,Arial,sans-serif">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eaf6f5"/>
+      <stop offset="1" stop-color="#d3ecea"/>
+    </linearGradient>
+    <linearGradient id="hub" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#138a91"/>
+      <stop offset="1" stop-color="#0b5257"/>
+    </linearGradient>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10z" fill="#0f6e74"/>
+    </marker>
+  </defs>
+  <rect width="600" height="440" fill="url(#sky)"/>
+  <path d="M0 370c50 0 50-16 100-16s50 16 100 16 50-16 100-16 50 16 100 16 50-16 100-16 50 16 100 16v70H0z" fill="#9fd8d4" opacity=".55"/>
+  <path d="M0 395c50 0 50-14 100-14s50 14 100 14 50-14 100-14 50 14 100 14 50-14 100-14 50 14 100 14v45H0z" fill="#5fbcb7" opacity=".55"/>
+
+  <g fill="none" stroke="#0f6e74" stroke-width="2.4" stroke-dasharray="6 6">
+    <path d="M150 168 C200 180 232 196 252 214" marker-end="url(#ah)"/>
+    <path d="M450 168 C400 180 368 196 348 214" marker-end="url(#ah)"/>
+    <path d="M300 330 L300 308" marker-end="url(#ah)"/>
+  </g>
+
+  <g transform="translate(300 245)">
+    <circle r="60" fill="url(#hub)"/>
+    <circle r="60" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="10"/>
+    <path d="M0-34 -26-23v20c0 18 11 30 26 36 15-6 26-18 26-36v-20z" fill="#fff" opacity=".95"/>
+    <path d="m-11 0 8 8 15-15" fill="none" stroke="#0f6e74" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text y="48" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">E-DBA</text>
+  </g>
+
+  <g transform="translate(100 64)">
+    <rect x="-62" y="-6" width="124" height="104" rx="14" fill="#fff" stroke="#cfe5e3"/>
+    <path d="M-30 24 0 6l30 18z" fill="#0f6e74"/>
+    <rect x="-26" y="26" width="52" height="30" fill="#e3f3f3"/>
+    <rect x="-20" y="32" width="8" height="24" fill="#0f6e74"/><rect x="-4" y="32" width="8" height="24" fill="#0f6e74"/><rect x="12" y="32" width="8" height="24" fill="#0f6e74"/>
+    <text y="80" text-anchor="middle" font-size="13" font-weight="700" fill="#16191f">Harbor U.</text>
+  </g>
+  <g transform="translate(500 64)">
+    <rect x="-62" y="-6" width="124" height="104" rx="14" fill="#fff" stroke="#cfe5e3"/>
+    <path d="M-30 24 0 6l30 18z" fill="#c2410c"/>
+    <rect x="-26" y="26" width="52" height="30" fill="#fdf0e9"/>
+    <rect x="-20" y="32" width="8" height="24" fill="#c2410c"/><rect x="-4" y="32" width="8" height="24" fill="#c2410c"/><rect x="12" y="32" width="8" height="24" fill="#c2410c"/>
+    <text y="80" text-anchor="middle" font-size="13" font-weight="700" fill="#16191f">Summit Tech</text>
+  </g>
+  <g transform="translate(300 330)">
+    <rect x="-70" y="0" width="140" height="44" rx="12" fill="#fff" stroke="#cfe5e3"/>
+    <circle cx="-44" cy="22" r="12" fill="#1d4ed8" opacity=".12"/>
+    <circle cx="-44" cy="18" r="4" fill="none" stroke="#1d4ed8" stroke-width="2"/>
+    <path d="M-51 29c2-5 4-6 7-6s5 1 7 6" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round"/>
+    <text x="8" y="27" text-anchor="middle" font-size="12.5" font-weight="700" fill="#16191f">data users</text>
+  </g>
+
+  <g font-size="11.5" font-weight="600">
+    <g transform="translate(120 200)"><rect x="-44" y="-13" width="88" height="24" rx="12" fill="#fff" stroke="#0f6e74"/><text text-anchor="middle" y="4" fill="#0f6e74">courses</text></g>
+    <g transform="translate(480 200)"><rect x="-44" y="-13" width="88" height="24" rx="12" fill="#fff" stroke="#c2410c"/><text text-anchor="middle" y="4" fill="#c2410c">theses</text></g>
+    <g transform="translate(480 290)"><rect x="-60" y="-13" width="120" height="24" rx="12" fill="#fff" stroke="#1d4ed8"/><text text-anchor="middle" y="4" fill="#1d4ed8">ID · GPA checks</text></g>
+    <g transform="translate(120 290)"><rect x="-60" y="-13" width="120" height="24" rx="12" fill="#fff" stroke="#15803d"/><text text-anchor="middle" y="4" fill="#15803d">settled · logged</text></g>
+  </g>
+</svg>

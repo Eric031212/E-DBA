@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon, csrf_field with context %}
+{% block title %}{{ svc.spec.title }}{% endblock %}
+{% block content %}
+<div class="crumbs"><a href="/w/{{ org.slug }}">{{ org.short_name }}</a> / {{ svc.spec.title }}</div>
+<div class="page-head"><div><h1>{{ svc.spec.title }}</h1><p>{{ svc.spec.summary }} Each successful record costs <b>{{ svc.price_cents|money }}</b> of quota; failed lookups are free.</p></div><span class="quota-pill" id="quota">{{ user.quota_cents|money }} <small>quota</small></span></div>
+<div class="grid g2">
+  <form class="card" hx-post="/w/{{ org.slug }}/s/{{ svc.kind.value }}" hx-encoding="multipart/form-data" hx-target="#result" hx-indicator="#spin">
+    {{ csrf_field() }}<input type="hidden" name="idem" value="{{ idem }}">
+    <h2>Single lookup</h2>
+    {% for name, typ in ep.input_schema.items() %}
+    <div class="field"><label for="f-{{ name }}">{{ name|replace('_', ' ')|capitalize }}{% if typ == 'file' %} <span class="faint">(optional)</span>{% endif %}</label>
+      {% if typ == 'file' %}<input id="f-{{ name }}" type="file" name="{{ name }}">
+      {% else %}<input id="f-{{ name }}" type="{{ 'number' if typ in ('int', 'float') else 'text' }}" {{ 'step=any' if typ == 'float' }} name="{{ name }}" placeholder="{{ typ }}" required>{% endif %}
+    </div>
+    {% endfor %}
+    <button class="btn primary">Send <span id="spin" class="htmx-indicator">…</span></button>
+  </form>
+  <form class="card" hx-post="/w/{{ org.slug }}/s/{{ svc.kind.value }}/batch" hx-encoding="multipart/form-data" hx-target="#result" hx-indicator="#spin2">
+    {{ csrf_field() }}
+    <h2>{{ icon('upload') }} Batch upload</h2>
+    <p class="muted" style="font-size:.9rem">Excel or CSV with a header row containing <code>{{ ep.input_schema|dictsort|rejectattr(1, 'equalto', 'file')|map(attribute=0)|join(', ') }}</code>. One lookup per row; only successful rows are charged.</p>
+    <div class="field"><input type="file" name="file" accept=".xlsx,.csv" required></div>
+    <button class="btn primary">Run batch <span id="spin2" class="htmx-indicator">…</span></button>
+  </form>
+</div>
+<div id="result" class="result"></div>
+{% endblock %}

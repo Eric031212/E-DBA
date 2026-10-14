@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}API configurations{% endblock %}
+{% block content %}
+<div class="crumbs"><a href="/w/{{ org.slug }}">{{ org.short_name }}</a> / API configurations</div>
+<div class="page-head"><div><h1>API configurations</h1><p>Connect the services your O-Convener added to {{ org.short_name }}'s own systems. A service appears on dashboards once every endpoint it needs is configured.</p></div></div>
+<div class="card table-wrap">
+  <table>
+    <tr><th>Service</th><th>Status</th><th>Last modified</th><th></th></tr>
+    {% for svc, active, last in rows %}
+    <tr><td><b>{{ svc.spec.title }}</b><span class="sub">{{ svc.spec.operations|join(' + ') }}</span></td>
+      <td>{% if active %}<span class="badge ok">Active</span>{% else %}<span class="badge warn">Inactive</span>{% endif %}</td>
+      <td>{{ last|dt }}</td>
+      <td class="num"><a class="btn sm primary" href="/w/{{ org.slug }}/connectors/{{ svc.kind.value }}">Edit</a></td></tr>
+    {% else %}<tr><td class="empty" colspan="4">No API-backed services have been added yet. Ask your O-Convener to add Identity, GPA or Thesis services.</td></tr>{% endfor %}
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf_field, empty with context %}
+{% block title %}E-Admin accounts{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>E-Admin accounts</h1><p>Business admins review applications and manage policies and fees.</p></div></div>
+<div class="grid g3">
+  <div class="card span2 table-wrap">
+    <table>
+      <tr><th>Admin</th><th>Role</th><th>Status</th><th></th></tr>
+      {% for a in admins %}
+      <tr>
+        <td><b>{{ a.name or a.email }}</b><span class="sub">{{ a.email }}</span></td>
+        <td>{% if a.role == Role.SENIOR_E_ADMIN %}<span class="badge brand">Senior E-Admin</span>{% else %}<span class="badge">E-Admin</span>{% endif %}</td>
+        <td>{% if a.is_active %}<span class="badge ok">Active</span>{% else %}<span class="badge err">Disabled</span>{% endif %}</td>
+        <td class="num"><form method="post" action="/admin/e-admins/{{ a.id }}" class="btns" style="justify-content:flex-end">{{ csrf_field() }}
+          {% if a.role == Role.SENIOR_E_ADMIN %}<button class="btn sm" name="op" value="demote">Make regular</button>{% else %}<button class="btn sm" name="op" value="promote">Make senior</button>{% endif %}
+          {% if a.is_active %}<button class="btn sm danger" name="op" value="disable">Disable</button>{% else %}<button class="btn sm ok" name="op" value="enable">Enable</button>{% endif %}
+        </form></td>
+      </tr>
+      {% else %}{{ empty("No E-Admins yet.", 4) }}{% endfor %}
+    </table>
+  </div>
+  <form class="card" method="post" action="/admin/e-admins">
+    {{ csrf_field() }}
+    <h2>Add an E-Admin</h2>
+    <div class="field"><label>Email</label><input type="email" name="email" required></div>
+    <div class="field"><label>Name</label><input type="text" name="name"></div>
+    <div class="field"><label class="check"><input type="checkbox" name="senior" value="true"> Senior E-Admin (final review)</label></div>
+    <button class="btn primary">Create account</button>
+  </form>
+</div>
+{% endblock %}

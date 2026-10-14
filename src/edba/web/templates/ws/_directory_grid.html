@@ -1,0 +1,8 @@
+{% from "_macros.html" import icon %}
+<div class="tiles">
+{% for o in orgs %}
+  <a class="tile" href="/w/{{ o.slug }}"><span class="ic">{{ icon('globe') }}</span><b>{{ o.full_name }}</b><p>{{ o.short_name }}{% if user.org_id == o.id %} · your organization{% endif %}</p></a>
+{% else %}
+  <div class="card empty">No organization matches.</div>
+{% endfor %}
+</div>

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf_field with context %}
+{% block title %}Seek help{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Seek help</h1><p>Questions go to the E-DBA technical admins; answers also arrive by email.</p></div></div>
+<div class="grid g2">
+  <form class="card" method="post" action="/help">
+    {{ csrf_field() }}
+    <h2>Ask a question</h2>
+    <div class="field"><label>Subject</label><input type="text" name="title" required maxlength="200"></div>
+    <div class="field"><label>Question</label><textarea name="body" required></textarea></div>
+    <button class="btn primary">Send</button>
+  </form>
+  <div class="card">
+    <h2>My questions</h2>
+    {% for t in tickets %}
+      <div style="margin-bottom:14px">
+        <b>{{ t.title }}</b> {% if t.answer %}<span class="badge ok">Answered</span>{% else %}<span class="badge warn">Open</span>{% endif %}
+        <div class="muted" style="font-size:.88rem">{{ t.body }}</div>
+        {% if t.answer %}<div class="note" style="margin-top:6px"><b>{{ t.answered_by }}:</b> {{ t.answer }}</div>{% endif %}
+      </div>
+    {% else %}<p class="muted">Nothing asked yet.</p>{% endfor %}
+  </div>
+</div>
+{% endblock %}

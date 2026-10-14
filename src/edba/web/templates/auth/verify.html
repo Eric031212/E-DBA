@@ -1,0 +1,16 @@
+{% extends "solo.html" %}
+{% from "_macros.html" import csrf_field with context %}
+{% block title %}Enter code{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>Check your inbox</h1>
+  <p class="muted">Enter the code we sent to <b>{{ email }}</b>.</p>
+  <form method="post" action="{{ action }}">
+    {{ csrf_field() }}
+    <div class="field"><input class="otp" name="code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required autofocus autocomplete="one-time-code" aria-label="6-digit code"></div>
+    <button class="btn primary block">{{ "Confirm application" if purpose == "apply" else "Sign in" }}</button>
+  </form>
+  {% if purpose != "apply" %}<p class="muted" style="margin:14px 0 0">Wrong address or no code? <a href="/login">Start over</a>.</p>{% endif %}
+</div>
+{% if settings.mail_backend == 'inbox' and settings.env != 'prod' %}<p class="note" style="margin-top:14px">Demo mode: open the <a href="/dev/mailbox?to={{ email }}" target="_blank">dev mailbox</a> for the code.</p>{% endif %}
+{% endblock %}

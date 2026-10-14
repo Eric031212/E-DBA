@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf_field, icon, empty with context %}
+{% block title %}Services{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Services</h1><p>Choose what {{ org.short_name }} offers. Each service can be added once; paid services need a verified bank account. Level-3 providers wire up the APIs.</p></div></div>
+<div class="card table-wrap">
+  <h2>In your workspace</h2>
+  <table>
+    <tr><th>Service</th><th>Status</th><th>Price per use</th><th>Thesis access</th><th></th></tr>
+    {% for s, active in mine %}
+    <tr>
+      <td><b>{{ s.spec.title }}</b><span class="sub">{{ "public · level 1+" if s.spec.public else "private · level 2+" }}</span></td>
+      <td>{% if active %}<span class="badge ok">Active</span>{% else %}<span class="badge warn" title="A level-3 provider must configure the API">Needs API</span>{% endif %}</td>
+      <td colspan="2">
+        {% if s.spec.charging %}
+        <form method="post" action="/org/services/{{ s.kind.value }}" class="row" style="flex-wrap:nowrap">{{ csrf_field() }}
+          <input type="number" name="price" step="0.01" min="0" value="{{ s.price_cents|plain }}" style="width:100px;padding:5px 8px">
+          {% if s.kind.value == 'thesis' %}
+          <select name="thesis_mode" style="width:150px;padding:5px 8px"><option value="display_only" {{ 'selected' if s.thesis_mode.value == 'display_only' }}>Display only</option><option value="download" {{ 'selected' if s.thesis_mode.value == 'download' }}>Download</option></select>
+          {% endif %}
+          <button class="btn sm" name="op" value="update">Save</button>
+        </form>
+        {% else %}<span class="faint">free</span>{% endif %}
+      </td>
+      <td class="num"><form method="post" action="/org/services/{{ s.kind.value }}" onsubmit="return confirm('Remove {{ s.spec.title }}? Its API configuration is deleted too.')">{{ csrf_field() }}<button class="btn sm danger" name="op" value="remove">Remove</button></form></td>
+    </tr>
+    {% else %}{{ empty("No services yet.", 5) }}{% endfor %}
+  </table>
+</div>
+{% if available %}
+<h2 style="margin-top:24px">Add a service</h2>
+<div class="grid g2">
+  {% for spec in available %}
+  <form class="card" method="post" action="/org/services">
+    {{ csrf_field() }}<input type="hidden" name="kind" value="{{ spec.kind.value }}">
+    <div class="card-head"><h3 style="margin:0">{{ spec.title }}</h3><span class="badge {{ 'brand' if spec.public else 'info' }}">{{ "public" if spec.public else "private" }}</span></div>
+    <p class="muted" style="font-size:.9rem">{{ spec.summary }}</p>
+    {% if spec.charging %}
+      <div class="row">
+        <div class="field"><label>Price per use (quota)</label><input type="number" name="price" step="0.01" min="0" value="1"></div>
+        {% if spec.kind.value == 'thesis' %}<div class="field"><label>Access</label><select name="thesis_mode"><option value="display_only">Display only</option><option value="download">Download</option></select></div>{% endif %}
+      </div>
+      {% if not has_bank %}<div class="note" style="margin-bottom:10px">Set up the <a href="/org/bank">bank account</a> first.</div>{% endif %}
+    {% endif %}
+    <button class="btn primary" {{ 'disabled' if spec.charging and not has_bank }}>Add</button>
+  </form>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

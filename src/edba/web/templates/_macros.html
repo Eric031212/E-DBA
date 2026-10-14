@@ -1,0 +1,33 @@
+{% macro icon(name) %}<svg class="icon" aria-hidden="true"><use href="#i-{{ name }}"/></svg>{% endmacro %}
+
+{% macro csrf_field() %}<input type="hidden" name="_csrf" value="{{ csrf }}">{% endmacro %}
+
+{% macro status_badge(status) -%}
+  {%- set s = status.value if status.value is defined else status -%}
+  {%- set map = {"pending": ("warn", "Waiting for E-Admin"), "first_approved": ("info", "Waiting for Senior E-Admin"),
+                 "accepted": ("ok", "Accepted"), "rejected": ("err", "Rejected")} -%}
+  {%- set c = map.get(s, ("", s)) -%}
+  <span class="badge {{ c[0] }}">{{ c[1] }}</span>
+{%- endmacro %}
+
+{% macro level_badge(level) -%}
+  <span class="badge {{ ['', '', 'info', 'brand'][level] }}">L{{ level }} · {{ ACCESS_LEVELS[level] }}</span>
+{%- endmacro %}
+
+{% macro timeline(steps) %}
+<ol class="timeline">
+  {% for s in steps %}
+  <li class="{{ s.state }}">
+    <span class="dot">{% if s.state in ('done', 'approved') %}{{ icon('check') }}{% elif s.state == 'rejected' %}{{ icon('x') }}{% elif s.state == 'waiting' %}{{ icon('clock') }}{% endif %}</span>
+    <b>{{ s.title }}</b>
+    <span class="meta">
+      {% if s.state == 'done' %}Completed{% elif s.state == 'approved' %}Approved{% elif s.state == 'rejected' %}Rejected{% elif s.state == 'waiting' %}In progress{% elif s.state == 'skipped' %}Not reached{% else %}Not started{% endif %}
+      {% if s.actor %} · {{ s.actor }}{% endif %}{% if s.at %} · {{ s.at|dt }}{% endif %}
+    </span>
+    {% if s.notes %}<div class="note" style="margin-top:6px">{{ s.notes }}</div>{% endif %}
+  </li>
+  {% endfor %}
+</ol>
+{% endmacro %}
+
+{% macro empty(text, cols=1) %}<tr><td class="empty" colspan="{{ cols }}">{{ text }}</td></tr>{% endmacro %}

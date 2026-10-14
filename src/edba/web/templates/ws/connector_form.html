@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf_field with context %}
+{% block title %}{{ spec.title }} API{% endblock %}
+{% block content %}
+<div class="crumbs"><a href="/w/{{ org.slug }}">{{ org.short_name }}</a> / <a href="/w/{{ org.slug }}/connectors">API configurations</a> / {{ spec.title }}</div>
+<div class="page-head"><div><h1>{{ spec.title }}</h1><p>Schemas are flat JSON objects mapping field names to <code>string</code>, <code>int</code>, <code>float</code>, <code>bool</code> or <code>file</code>. Forms and batch templates are generated from the input schema; result tables from the output schema.</p></div></div>
+<div class="grid {{ 'g2' if forms|length > 1 else '' }}">
+{% for f in forms %}
+  <form class="card" method="post" style="{{ 'max-width:640px' if forms|length == 1 }}">
+    {{ csrf_field() }}<input type="hidden" name="operation" value="{{ f.op }}">
+    <div class="card-head"><h2>{{ f.op|capitalize }} endpoint</h2>{% if f.configured %}<span class="badge ok">Configured</span>{% else %}<span class="badge warn">Not set</span>{% endif %}</div>
+    <div class="row">
+      <div class="field" style="flex:2"><label>Base URL</label><input class="code" type="text" name="base_url" value="{{ f.base_url }}" placeholder="https://registry.example.edu" required></div>
+      <div class="field" style="max-width:110px"><label>Method</label><select name="method"><option {{ 'selected' if f.method == 'POST' }}>POST</option><option {{ 'selected' if f.method == 'GET' }}>GET</option></select></div>
+    </div>
+    <div class="field"><label>Path</label><input class="code" type="text" name="path" value="{{ f.path }}" placeholder="/student/record" required></div>
+    <div class="field"><label>Input schema</label><textarea class="code" name="input_schema" rows="3" required>{{ f.input }}</textarea></div>
+    <div class="field"><label>Output schema</label><textarea class="code" name="output_schema" rows="3" {{ '' if f.op == 'download' else 'required' }}>{{ f.output }}</textarea>{% if f.op == 'download' %}<div class="hint">Leave empty: this endpoint returns a PDF.</div>{% endif %}</div>
+    <button class="btn primary">Save {{ f.op }} endpoint</button>
+  </form>
+{% endfor %}
+</div>
+{% if settings.mount_demo_gateway %}<p class="note" style="margin-top:16px">Demo gateway: base URL <code>{{ settings.bank_gateway_url }}/campus/harbor</code> (or <code>summit</code>), paths <code>/student/authenticate</code>, <code>/student/record</code>, <code>/thesis/search</code>, <code>/thesis/pdf</code> (GET).</p>{% endif %}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf_field with context %}
+{% block title %}Course configurations{% endblock %}
+{% block content %}
+<div class="crumbs"><a href="/w/{{ org.slug }}">{{ org.short_name }}</a> / Course configurations</div>
+<div class="page-head"><div><h1>Course configurations</h1><p>Level-3 providers maintain {{ org.short_name }}'s course catalogue. Inactive courses are hidden from everyone else.</p></div></div>
+<div class="grid g3">
+  <div class="card span2 table-wrap">
+    <table>
+      <tr><th>Code</th><th>Course</th><th class="num">Units</th><th>Status</th><th></th></tr>
+      {% for c in courses %}
+      <tr><td class="mono"><b>{{ c.code }}</b></td><td>{{ c.title }}</td><td class="num">{{ c.units }}</td>
+        <td>{% if c.active %}<span class="badge ok">Active</span>{% else %}<span class="badge">Inactive</span>{% endif %}</td>
+        <td class="num"><div class="btns" style="justify-content:flex-end"><a class="btn sm" href="?edit={{ c.id }}">Edit</a>
+          <form method="post" onsubmit="return confirm('Delete {{ c.code }}?')">{{ csrf_field() }}<input type="hidden" name="course_id" value="{{ c.id }}"><button class="btn sm danger" name="op" value="delete">Delete</button></form></div></td></tr>
+      {% else %}<tr><td class="empty" colspan="5">No courses yet.</td></tr>{% endfor %}
+    </table>
+  </div>
+  <form class="card" method="post" style="align-self:start">
+    {{ csrf_field() }}
+    <h2>{{ "Edit " ~ current.code if current else "New course" }}</h2>
+    {% if current %}<input type="hidden" name="course_id" value="{{ current.id }}">{% endif %}
+    <div class="row"><div class="field"><label>Code</label><input type="text" name="code" value="{{ current.code if current else '' }}" required maxlength="20"></div>
+      <div class="field" style="max-width:90px"><label>Units</label><input type="number" name="units" min="0" max="30" value="{{ current.units if current else 3 }}"></div></div>
+    <div class="field"><label>Title</label><input type="text" name="title" value="{{ current.title if current else '' }}" required></div>
+    <div class="field"><label>Description</label><textarea name="description">{{ current.description if current else '' }}</textarea></div>
+    <div class="field"><label>Status</label><select name="active"><option value="active" {{ 'selected' if not current or current.active }}>Active</option><option value="" {{ 'selected' if current and not current.active }}>Inactive</option></select></div>
+    <div class="btns"><button class="btn primary" name="op" value="save">{{ "Save changes" if current else "Create course" }}</button>{% if current %}<a class="btn" href="/w/{{ org.slug }}/courses/manage">Cancel</a>{% endif %}</div>
+  </form>
+</div>
+{% endblock %}

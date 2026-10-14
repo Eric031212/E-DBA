@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% from "_macros.html" import status_badge, timeline, csrf_field, icon with context %}
+{% block title %}Application #{{ app.id }}{% endblock %}
+{% block content %}
+<div class="crumbs"><a href="/admin/applications">Applications</a> / #{{ app.id }}</div>
+<div class="page-head"><div><h1>{{ app.org_full_name }}</h1><p>Application #{{ app.id }} · {{ app.org_short_name }}</p></div>{{ status_badge(app.status) }}</div>
+<div class="grid g2">
+  <div class="stack">
+    <div class="card">
+      <h2>Details</h2>
+      <dl class="kv">
+        <dt>Full name</dt><dd>{{ app.org_full_name }}</dd>
+        <dt>Short name</dt><dd>{{ app.org_short_name }}</dd>
+        <dt>O-Convener</dt><dd>{{ app.convener_name or '—' }}<br><a href="mailto:{{ app.convener_email }}">{{ app.convener_email }}</a></dd>
+        <dt>Submitted</dt><dd>{{ app.submitted_at|dt }}</dd>
+        <dt>Proof</dt><dd>{% if app.proof_path %}<a class="btn sm" href="/admin/applications/{{ app.id }}/proof" target="_blank">{{ icon('doc') }} Open document</a><span class="hash" style="display:block;margin-top:4px">sha256 {{ app.proof_sha256[:24] }}…</span>{% else %}<span class="faint">Seeded demo application (no file)</span>{% endif %}</dd>
+      </dl>
+    </div>
+    {% if can_review %}
+    <form class="card" method="post" action="/admin/applications/{{ app.id }}">
+      {{ csrf_field() }}
+      <h2>{{ "Final review" if app.status.value == "first_approved" else "First review" }}</h2>
+      <div class="field"><label>Notes</label><textarea name="notes" placeholder="Required when rejecting; shown to the applicant."></textarea></div>
+      <div class="btns"><button class="btn primary" name="decision" value="approve">{{ icon('check') }} Approve</button><button class="btn danger" name="decision" value="reject">{{ icon('x') }} Reject</button></div>
+    </form>
+    {% elif app.status.value == "first_approved" and user.role == Role.E_ADMIN %}
+    <div class="note">Waiting for a Senior E-Admin.</div>
+    {% endif %}
+  </div>
+  <div class="card"><h2>Review trail</h2>{{ timeline(steps) }}</div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf_field, level_badge with context %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Profile</h1></div></div>
+<div class="grid g2">
+  <form class="card" method="post" action="/me">
+    {{ csrf_field() }}
+    <div class="field"><label>Email</label><input type="email" value="{{ user.email }}" disabled></div>
+    <div class="field"><label>Name</label><input type="text" name="name" value="{{ user.name }}"></div>
+    <div class="field"><label>Contact information</label><input type="text" name="contact" value="{{ user.contact }}"></div>
+    <button class="btn primary">Save</button>
+  </form>
+  <div class="card">
+    <dl class="kv">
+      <dt>Role</dt><dd>{{ user.role.label }}</dd>
+      {% if user.organization %}<dt>Organization</dt><dd>{{ user.organization.full_name }} ({{ user.organization.short_name }})</dd>{% endif %}
+      {% if user.role == Role.MEMBER %}<dt>Access</dt><dd>{{ level_badge(user.access_level) }}</dd><dt>Quota</dt><dd>{{ user.quota_cents|money }}</dd>{% endif %}
+      <dt>Last sign-in</dt><dd>{{ user.last_login_at|dt }}</dd>
+      <dt>Member since</dt><dd>{{ user.created_at|dt }}</dd>
+    </dl>
+  </div>
+</div>
+{% endblock %}

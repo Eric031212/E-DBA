@@ -1,0 +1,19 @@
+{% extends "solo.html" %}
+{% from "_macros.html" import csrf_field with context %}
+{% block title %}Sign in{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>Sign in</h1>
+  <p class="muted">No passwords: we email you a 6-digit code that works for 5 minutes.</p>
+  <form method="post" action="/login">
+    {{ csrf_field() }}
+    <div class="field"><label for="email">Email</label><input id="email" type="email" name="email" value="{{ email or '' }}" required autofocus autocomplete="email"></div>
+    <button class="btn primary block">Send code</button>
+  </form>
+  <hr>
+  <p class="muted" style="margin:0">New organization? <a href="/apply">Apply to join E-DBA</a>.</p>
+</div>
+{% if settings.mail_backend == 'inbox' and settings.env != 'prod' %}
+<p class="note" style="margin-top:14px">Demo mode: codes are delivered to the <a href="/dev/mailbox">dev mailbox</a>. Try <code>provider@harbor.example</code>, <code>convener@harbor.example</code>, <code>senior@edba.example</code> or <code>tadmin@edba.example</code>.</p>
+{% endif %}
+{% endblock %}

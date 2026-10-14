@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf_field, empty with context %}
+{% block title %}Membership fees{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Membership fees</h1><p>What organizations pay E-DBA so their members can sign in.</p></div></div>
+<div class="grid g3">
+  <form class="card" method="post" action="/admin/fees">
+    {{ csrf_field() }}
+    <div class="field"><label>Level 1 · public data access</label><input type="number" step="0.01" min="0" name="level1" value="{{ fs.level1_cents|plain }}"><div class="hint">One-off per organization, covers all its level-1 users.</div></div>
+    <div class="field"><label>Level 2 · private data consumption</label><input type="number" step="0.01" min="0" name="level2" value="{{ fs.level2_cents|plain }}"><div class="hint">Per person.</div></div>
+    <div class="field"><label>Level 3 · private data provision</label><input type="number" step="0.01" min="0" name="level3" value="{{ fs.level3_cents|plain }}"><div class="hint">Per person.</div></div>
+    <button class="btn primary">Save fees</button>
+    <p class="faint" style="font-size:.8rem;margin:10px 0 0">Last changed by {{ fs.updated_by }} · {{ fs.updated_at|dt }}</p>
+  </form>
+  <div class="card span2 table-wrap">
+    <h2>Settlement ledger</h2>
+    <table>
+      <tr><th>When</th><th>Kind</th><th>Memo</th><th class="num">Amount</th><th>Status</th></tr>
+      {% for l in ledger %}<tr><td>{{ l.created_at|dt(True) }}</td><td>{{ l.kind.value }}</td><td>{{ l.memo }}<span class="sub">{{ l.actor_email }}</span></td><td class="num">{{ l.amount_cents|money }}</td><td>{% if l.status.value == 'settled' %}<span class="badge ok">settled</span>{% else %}<span class="badge err" title="{{ l.gateway_reason }}">failed</span>{% endif %}</td></tr>
+      {% else %}{{ empty("No transfers yet.", 5) }}{% endfor %}
+    </table>
+  </div>
+</div>
+{% endblock %}

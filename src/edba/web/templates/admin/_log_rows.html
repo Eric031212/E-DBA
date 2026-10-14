@@ -1,0 +1,12 @@
+{% for e in events %}
+<tr>
+  <td class="faint mono">{{ e.id }}</td>
+  <td style="white-space:nowrap">{{ e.at|dt }}</td>
+  <td>{{ e.actor_email }}{% if e.actor_role %}<span class="sub">{{ e.actor_role.replace('_', '-') }}</span>{% endif %}</td>
+  <td>{{ names.get(e.org_id, '—') }}</td>
+  <td><code>{{ e.action }}</code></td>
+  <td>{{ e.summary }}<span class="hash" title="SHA-256 of this event, chained to the previous one">{{ e.hash[:16] }}…</span></td>
+</tr>
+{% else %}
+<tr><td class="empty" colspan="6">No matching events.</td></tr>
+{% endfor %}
